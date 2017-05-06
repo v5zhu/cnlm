@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.vvboot.end.busi.dao.init.article.ArticleCategoryMybatisDao">
+    <select id="findCategoriesByParentCategory" resultType="com.vvboot.end.busi.entity.init.article.ArticleCategory"
+            parameterType="hashMap">
+        select c.*
+        from t_bi_article_category c
+        where 1=1
+        <choose>
+            <when test="parentCategory==''">
+                and c.parent_category is null
+            </when>
+            <otherwise>
+                and c.parent_category=#{parentCategory}
+            </otherwise>
+        </choose>
+    </select>
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.vvboot.end.busi.dao.ToutiaoMybatisDao">
+    <insert id="insertToutiaoInBatch" parameterType="list">
+        insert ignore into t_b_toutiao(
+        uniquekey,title,date,category,author_name,
+        url,thumbnail_pic_s,thumbnail_pic_s02,thumbnail_pic_s03,
+        read_amount,comment_amount,approval_amount,oppose_amount,
+        reserve1,reserve2,reserve3,reserve4,reserve5
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.uniquekey},#{item.title},#{item.date},#{item.category},#{item.authorName},
+            #{item.url},#{item.thumbnailPicS},#{item.thumbnailPicS02},#{item.thumbnailPicS03},
+            #{item.readAmount},#{item.commentAmount},#{item.approvalAmount},#{item.opposeAmount},
+            #{item.reserve1},#{item.reserve2},#{item.reserve3},#{item.reserve4},#{item.reserve5}
+            )
+        </foreach>
+    </insert>
+    <select id="overview" resultType="com.vvboot.end.busi.entity.Toutiao" parameterType="hashMap">
+        SELECT
+            tt.uniquekey,
+            tt.title,
+            tt.date,
+            tt.category,
+	        tt.author_name,
+            tt.url,
+            tt.thumbnail_pic_s,
+            tt.read_amount,
+            tt.comment_amount,
+            tt.approval_amount,
+            tt.oppose_amount
+        FROM
+            t_b_toutiao tt
+        ORDER BY
+            tt.date DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+    <select id="findAll" resultType="com.vvboot.end.busi.entity.Toutiao">
+        select * from t_b_toutiao tt ORDER BY tt.date DESC
+    </select>
+    <delete id="deleteToutiaoBefore10" parameterType="java.util.Date">
+        delete from t_b_toutiao where date <![CDATA[<]]> #{0}
+    </delete>
+    <update id="increaseApprovalAmount" parameterType="string">
+        update t_b_toutiao
+        <set>
+            approval_amount=approval_amount+1
+        </set>
+        where uniquekey=#{0}
+    </update>
+    <update id="increaseOpposeAmount" parameterType="string">
+        update t_b_toutiao
+        <set>
+            oppose_amount=oppose_amount+1
+        </set>
+        where uniquekey=#{0}
+    </update>
+    <select id="findById" resultType="com.vvboot.end.busi.entity.Toutiao" parameterType="string">
+        select tt.* from t_b_toutiao where tt.uniquekey=#{0}
+    </select>
+    <select id="findApprovalAmountById" resultType="int" parameterType="string">
+        select approval_amount
+        from t_b_toutiao
+        where uniquekey=#{0}
+    </select>
+    <select id="findOpposeAmountById" resultType="int" parameterType="string">
+        select oppose_amount
+        from t_b_toutiao
+        where uniquekey=#{0}
+    </select>
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.vvboot.busi.end.dao.article.ArticleCommentReplyMybatisDao">
+    <insert id="addReply" parameterType="com.vvboot.end.busi.entity.article.ArticleCommentReply">
+        insert into t_b_article_comment_reply(
+        id,comment_id,sponsor_id,replier_id,content,
+        approval_amount,oppose_amount,create_time,update_time
+        )
+        values(
+        #{id},#{commentId},#{sponsorId},#{replierId},#{content},
+        #{approvalAmount},#{opposeAmount},#{createTime},#{updateTime}
+        )
+    </insert>
+    <select id="replyList" resultType="com.vvboot.end.busi.entity.article.ArticleCommentReply" parameterType="string">
+        select re.*
+        from t_b_article_comment_reply re
+        where re.comment_id=#{0}
+    </select>
+    <select id="findCommentReplySponsors" resultType="string" parameterType="string">
+        select count(re.sponsor_id)
+        from t_b_article_comment_reply re
+        left join t_b_article_comment c on c.id=re.comment_id
+        where c.article_id=#{0}
+        group by re.sponsor_id;
+    </select>
+    <select id="findCommentRepliers" resultType="string" parameterType="string">
+        select count(re.replier_id)
+        from t_b_article_comment_reply re
+        left join t_b_article_comment c on c.id=re.comment_id
+        where c.article_id=#{0}
+        group by re.replier_id;
+    </select>
+    <update id="increaseApprovalAmount" parameterType="string">
+        update t_b_article_comment_reply
+        <set>
+            approval_amount=approval_amount+1
+        </set>
+        where id=#{0}
+    </update>
+    <update id="increaseOpposeAmount" parameterType="string">
+        update t_b_article_comment_reply
+        <set>
+            oppose_amount=oppose_amount+1
+        </set>
+        where id=#{0}
+    </update>
+    <select id="findApprovalAmountById" resultType="int" parameterType="string">
+        select approval_amount
+        from t_b_article_comment_reply
+        where id=#{0}
+    </select>
+    <select id="findOpposeAmountById" resultType="int" parameterType="string">
+        select oppose_amount
+        from t_b_article_comment_reply
+        where id=#{0}
+    </select>
+</mapper>

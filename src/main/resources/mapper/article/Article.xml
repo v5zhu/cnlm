@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.vvboot.busi.end.dao.article.ArticleMybatisDao">
+    <insert id="writeArticle" parameterType="com.vvboot.end.busi.entity.article.Article">
+        insert into t_b_article(
+        id,user_id,author,title,summary,
+        content,category,type,tag,read_amount,
+        comment_amount,approval_amount,oppose_amount,create_time,update_time,
+        audit_status
+        )
+        values(
+        #{id},#{userId},#{author},#{title},#{summary},
+        #{content},#{category},#{type},#{tag},#{readAmount},
+        #{commentAmount},#{approvalAmount},#{opposeAmount},#{createTime},#{updateTime},
+        #{auditStatus}
+        )
+    </insert>
+    <select id="findById" resultType="com.vvboot.end.busi.entity.article.Article" parameterType="string">
+        select a.* from t_b_article a where a.id=#{0}
+    </select>
+    <update id="updateArticle" parameterType="com.vvboot.end.busi.entity.article.Article">
+        update t_b_article
+        <set>
+            title=#{title},
+            summary=#{summary},
+            content=#{content},
+            category=#{category},
+            type=#{type},
+            tag=#{tag},
+            read_amount=#{readAmount},
+            comment_amount=#{commentAmount},
+            approval_amount=#{approvalAmount},
+            oppose_amount=#{opposeAmount},
+            update_time=#{updateTime},
+            audit_status=#{auditStatus}
+        </set>
+        where id=#{id}
+    </update>
+    <select id="articleList" resultType="com.vvboot.end.busi.entity.article.Article" parameterType="string">
+        select art.*
+        from t_b_article art
+        where art.userId=#{0}
+    </select>
+
+    <select id="findAll" resultType="com.vvboot.end.busi.entity.article.Article">
+        select art.*
+        from t_b_article art
+    </select>
+    <update id="increaseCommentAmount" parameterType="string">
+        update t_b_article
+        <set>
+            comment_amount=comment_amount+1
+        </set>
+        where id=#{0}
+    </update>
+    <update id="increaseApprovalAmount" parameterType="string">
+        update t_b_article
+        <set>
+            approval_amount=approval_amount+1
+        </set>
+        where id=#{0}
+    </update>
+    <update id="increaseOpposeAmount" parameterType="string">
+        update t_b_article
+        <set>
+            oppose_amount=oppose_amount+1
+        </set>
+        where id=#{0}
+    </update>
+    <select id="findApprovalAmountById" resultType="int" parameterType="string">
+        select approval_amount
+        from t_b_article
+        where id=#{0}
+    </select>
+    <select id="findOpposeAmountById" resultType="int" parameterType="string">
+        select oppose_amount
+        from t_b_article
+        where id=#{0}
+    </select>
+</mapper>

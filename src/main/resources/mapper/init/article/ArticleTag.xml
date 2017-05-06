@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.vvboot.end.busi.dao.init.article.ArticleTagMybatisDao">
+    <insert id="addArticleTag" parameterType="list">
+        insert ignore into t_b_article_tag(
+        article_id,name
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.articleId},#{item.name}
+            )
+        </foreach>
+    </insert>
+    <select id="findTagListByArticleIds" resultType="com.vvboot.end.busi.entity.init.article.ArticleTag"
+            parameterType="list">
+        select tag.*
+        from t_b_article_tag tag
+        where tag.article_id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+    <delete id="deleteTagsByArticleId" parameterType="string">
+        delete from t_b_article_tag where article_id=#{0}
+    </delete>
+</mapper>
