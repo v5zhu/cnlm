@@ -88,7 +88,7 @@ public class PhoneServiceImpl implements PhoneService {
             phoneCodeMybatisDao.updatePhoneCode(phoneCode);
         }
         logger.info("向手机号：[{}]发送验证码：[{}]", phone, code);
-        SmsUtil.sendSmsCode(phone, code);
+//        SmsUtil.sendSmsCode(phone, code);
     }
 
     @Override

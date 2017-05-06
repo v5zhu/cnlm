@@ -28,6 +28,7 @@ import java.util.Properties;
 })
 public class VvbootMybatisInterceptor implements Interceptor {
     private static final Logger logger = LoggerFactory.getLogger(VvbootMybatisInterceptor.class);
+    private Properties properties;
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -58,6 +59,7 @@ public class VvbootMybatisInterceptor implements Interceptor {
 
     @Override
     public void setProperties(Properties properties) {
+        this.properties=properties;
     }
 
     public static String getSql(Configuration configuration, BoundSql boundSql, String sqlId, long time, Object returnValue) {

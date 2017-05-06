@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -24,9 +25,13 @@ import javax.sql.DataSource;
 
 public class MasterDataSourceConfig {
 
-    // 精确到 master 目录，以便跟其他数据源隔离
     static final String PACKAGE = "com.vvboot.end.busi.dao";
-    static final String MAPPER_LOCATION = "classpath:mapper/**/*.xml";
+
+    @Value("${mybatis.mapperLocations}")
+    private String mapperLocation;
+
+    @Value("${mybatis.configLocation}")
+    private String configLocation;
 
     @Value("${master.datasource.url}")
     private String url;
@@ -63,11 +68,10 @@ public class MasterDataSourceConfig {
             throws Exception {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(masterDataSource);
-        org.apache.ibatis.session.Configuration configuration=new org.apache.ibatis.session.Configuration();
-        configuration.setMapUnderscoreToCamelCase(true);
-        sessionFactory.setConfiguration(configuration);
+        sessionFactory.setConfigLocation(new DefaultResourceLoader().getResource(configLocation));
         sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
-                .getResources(MasterDataSourceConfig.MAPPER_LOCATION));
+                .getResources(mapperLocation));
+
         return sessionFactory.getObject();
     }
 }
