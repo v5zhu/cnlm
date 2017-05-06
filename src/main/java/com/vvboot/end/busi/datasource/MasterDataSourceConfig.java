@@ -25,8 +25,8 @@ import javax.sql.DataSource;
 public class MasterDataSourceConfig {
 
     // 精确到 master 目录，以便跟其他数据源隔离
-    static final String PACKAGE = "com.touch.dao";
-    static final String MAPPER_LOCATION = "classpath:mapper/*.xml";
+    static final String PACKAGE = "com.vvboot.end.busi.dao";
+    static final String MAPPER_LOCATION = "classpath:mapper/**/*.xml";
 
     @Value("${master.datasource.url}")
     private String url;
