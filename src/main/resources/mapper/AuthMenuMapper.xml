@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.vvboot.end.dao.AuthMenuMybatisDao">
+    <insert id="insertAuthMenu" parameterType="com.vvboot.end.entity.AuthMenu">
+        insert ignore into t_si_auth_menu(
+        auth_id,menu_id
+        )
+        values(
+        #{authId},#{menuId}
+        )
+    </insert>
+    <insert id="insertAuthMenuInBatch" parameterType="hashMap">
+        insert ignore into t_si_auth_menu(
+        auth_id,menu_id
+        )
+        values
+        <foreach collection="authIds" item="authId" separator=",">
+            (#{authId},#{menuId})
+        </foreach>
+    </insert>
+    <select id="findByAuthMenu" resultType="com.vvboot.end.entity.AuthMenu" parameterType="com.vvboot.end.entity.AuthMenu">
+        select
+            am.auth_id,a.name authName,
+            am.menu_id,m.name menuName
+        from t_si_auth_menu am
+        left join t_si_auth a on a.auth_id=am.auth_id
+        left join t_si_menu m on m.menu_id=am.menu_id
+        where am.auth_id=#{authId} and am.menu_id=#{menuId}
+        group by
+            am.auth_id,a.name,
+            am.menu_id,m.name
+    </select>
+    <delete id="deleteAuthMenu" parameterType="com.vvboot.end.entity.AuthMenu">
+        delete from t_si_auth_menu where auth_id=#{authId} and menu_id=#{menuId}
+    </delete>
+    <delete id="deleteAuthMenuByMenuId" parameterType="long">
+        delete from t_si_auth_menu where menu_id=#{0}
+    </delete>
+    <delete id="deleteAuthMenuByAuthId" parameterType="long">
+        delete from t_si_auth_menu where auth_id=#{0}
+    </delete>
+    <select id="findAll" resultType="com.vvboot.end.entity.AuthMenu">
+        select
+            am.auth_id,a.name authName,
+            am.menu_id,m.name menuName
+        from t_si_auth_menu am
+        left join t_si_auth a on a.auth_id=am.auth_id
+        left join t_si_menu m on m.menu_id=am.menu_id
+        group by
+            am.auth_id,a.name,
+            am.menu_id,m.name
+        order by
+            a.auth_id asc
+    </select>
+    <select id="findAllAuthmenuByMenuId" resultType="com.vvboot.end.entity.AuthMenu" parameterType="long">
+        SELECT
+            a.auth_id,
+            a.name authName,
+            t.menu_id
+        FROM
+            t_si_auth a
+        LEFT JOIN (
+            SELECT
+                auth.auth_id,
+                am.menu_id
+            FROM
+                t_si_auth auth
+            JOIN t_si_auth_menu am ON am.auth_id = auth.auth_id
+            WHERE
+                am.menu_id = #{0}
+        ) t ON t.auth_id = a.auth_id
+    </select>
+</mapper>

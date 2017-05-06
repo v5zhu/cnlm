@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.vvboot.end.dao.RoleMybatisDao">
+    <insert id="insertRole" parameterType="com.vvboot.end.entity.Role" useGeneratedKeys="true" keyProperty="roleId">
+        insert ignore into t_si_role(
+        role_id,name,locked,create_time,update_time
+        )
+        values(
+        #{roleId},#{name},#{locked},#{createTime},#{updateTime}
+        )
+    </insert>
+    <select id="findByRoleId" resultType="com.vvboot.end.entity.Role" parameterType="long">
+        select * from t_si_role where role_id=#{0}
+    </select>
+    <update id="updateRole" parameterType="com.vvboot.end.entity.Role" useGeneratedKeys="true" keyProperty="roleId">
+        update t_si_role
+        <set>
+            name=#{name},
+            locked=#{locked},
+            update_time=#{updateTime}
+        </set>
+        where role_id=#{roleId} and locked=0
+    </update>
+    <select id="findAll" resultType="com.vvboot.end.entity.Role">
+        select * from t_si_role
+    </select>
+    <delete id="deleteRole" parameterType="long">
+        delete from t_si_role where role_id=#{0} and locked=0
+    </delete>
+    <update id="lock" parameterType="long">
+        update t_si_role
+        <set>
+            locked=1
+        </set>
+        where role_id=#{0} and locked=0
+    </update>
+
+    <update id="unlock" parameterType="long">
+        update t_si_role
+        <set>
+            locked=0
+        </set>
+        where role_id=#{0} and locked=1
+    </update>
+</mapper>
