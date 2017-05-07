@@ -1,5 +1,6 @@
 package com.vvboot.end.core.interceptors;
 
+import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -24,7 +25,8 @@ import java.util.Properties;
  */
 @Intercepts({
         @Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class}),
-        @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class})
+        @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
+        @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class,BoundSql.class})
 })
 public class VvbootMybatisInterceptor implements Interceptor {
     private static final Logger logger = LoggerFactory.getLogger(VvbootMybatisInterceptor.class);
@@ -54,7 +56,7 @@ public class VvbootMybatisInterceptor implements Interceptor {
 
     @Override
     public Object plugin(Object target) {
-        return Plugin.wrap(target, this);
+        return Plugin.wrap(target, VvbootMybatisInterceptor.this);
     }
 
     @Override
