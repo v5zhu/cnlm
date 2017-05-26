@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.vvboot.end.busi.dao.ForbidMybatisDao">
+    <insert id="addForbid" parameterType="com.vvboot.end.busi.entity.Forbid" useGeneratedKeys="true" keyProperty="id">
+        insert into t_b_forbid(
+        name,type,star,feature,harm,harm_detail,defense,create_time,create_user,update_time,update_user
+        )
+        values(
+        #{name},#{type},#{star},#{feature},#{harm},#{harmDetail},#{defense},#{createTime},#{createUser},#{updateTime},#{updateUser}
+        )
+    </insert>
+</mapper>
