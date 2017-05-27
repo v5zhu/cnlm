@@ -35,7 +35,7 @@ public class ForbidTypeController {
         try {
             JSONArray array = forbidTypeService.dropdown();
             Success ok = new Success(array, "查询成功");
-            return new ResponseEntity(array, HttpStatus.OK);
+            return new ResponseEntity(ok, HttpStatus.OK);
         } catch (CoreException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
