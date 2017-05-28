@@ -2,6 +2,7 @@ package com.vvboot.end.busi.controller;
 
 import com.vvboot.end.busi.entity.Forbid;
 import com.vvboot.end.busi.service.ForbidService;
+import com.vvboot.end.core.commons.Pageable;
 import com.vvboot.end.core.commons.Success;
 import com.vvboot.end.core.exception.CoreException;
 import org.slf4j.Logger;
@@ -11,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by zhuxl@paxsz.com on 2016/7/27.
@@ -35,7 +33,61 @@ public class ForbidController {
     public ResponseEntity add(@RequestBody Forbid forbid) {
         try {
             forbidService.addForbid(forbid);
-            Success ok = new Success( "添加成功", "恭喜你!添加成功");
+            Success ok = new Success("添加成功", "恭喜你!添加成功");
+            return new ResponseEntity(ok, HttpStatus.OK);
+        } catch (CoreException e) {
+            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "detail", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity detail(@RequestParam("id") Long id) {
+        try {
+            Forbid forbid = forbidService.detail(id);
+            Success ok = new Success(forbid, "查询成功");
+            return new ResponseEntity(ok, HttpStatus.OK);
+        } catch (CoreException e) {
+            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "pagelist", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity pagelist(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
+                                   @RequestParam(value = "pageSize", defaultValue = "5") int pageSize) {
+        try {
+            Pageable pageable = forbidService.pageList(pageNo, pageSize);
+            Success ok = new Success(pageable, "查询成功");
+            return new ResponseEntity(ok, HttpStatus.OK);
+        } catch (CoreException e) {
+            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "delete", method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity delete(@RequestParam("id") Long id) {
+        try {
+           forbidService.delete(id);
+            Success ok = new Success("删除成功", "删除成功");
+            return new ResponseEntity(ok, HttpStatus.OK);
+        } catch (CoreException e) {
+            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "update", method = RequestMethod.PUT,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity update(@RequestBody Forbid forbid) {
+        try {
+            forbidService.update(forbid);
+            Success ok = new Success("修改成功", "修改成功");
             return new ResponseEntity(ok, HttpStatus.OK);
         } catch (CoreException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);

@@ -12,4 +12,43 @@
         #{name},#{type},#{star},#{feature},#{harm},#{harmDetail},#{defense},#{createTime},#{createUser},#{updateTime},#{updateUser}
         )
     </insert>
+    <update id="update" parameterType="com.vvboot.end.busi.entity.Forbid">
+        update t_b_forbid
+        <set>
+            name=#{name},
+            type=#{type},
+            star=#{star},
+            feature=#{feature},
+            harm=#{harm},
+            harm_detail=#{harmDetail},
+            defense=#{defense},
+            update_time=#{updateTime},
+            update_user=#{updateUser}
+        </set>
+        where id=#{id}
+    </update>
+    <select id="detail" resultType="com.vvboot.end.busi.entity.Forbid" parameterType="long">
+        select
+            f.*,
+            bt.name typeName,
+            s.name starName
+        from t_b_forbid f
+        left join t_bi_forbid_type bt on bt.type=f.type
+        left join t_bi_star s on s.star=f.star
+        where f.id=#{0}
+    </select>
+
+    <select id="pageList" resultType="com.vvboot.end.busi.entity.Forbid">
+        select
+            f.*,
+            bt.name typeName,
+            s.name starName
+        from t_b_forbid f
+        left join t_bi_forbid_type bt on bt.type=f.type
+        left join t_bi_star s on s.star=f.star
+    </select>
+
+    <delete id="delete" parameterType="long">
+        delete from t_b_forbid where id=#{0}
+    </delete>
 </mapper>
