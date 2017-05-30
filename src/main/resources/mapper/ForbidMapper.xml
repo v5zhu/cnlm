@@ -66,9 +66,10 @@
                 <foreach collection="sorts" item="sort" open="order by " separator="," close="" index="i">
                       ${sort.prop} ${sort.order}
                 </foreach>
+                ,f.create_time desc
             </when>
             <otherwise>
-                order by f.type asc,f.star desc
+                order by f.type asc,f.star desc,f.create_time desc
             </otherwise>
         </choose>
     </select>
