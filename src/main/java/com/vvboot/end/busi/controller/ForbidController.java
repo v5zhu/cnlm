@@ -1,6 +1,7 @@
 package com.vvboot.end.busi.controller;
 
 import com.vvboot.end.busi.entity.Forbid;
+import com.vvboot.end.busi.params.PageParam;
 import com.vvboot.end.busi.service.ForbidService;
 import com.vvboot.end.core.commons.Pageable;
 import com.vvboot.end.core.commons.Success;
@@ -53,13 +54,12 @@ public class ForbidController {
         }
     }
 
-    @RequestMapping(value = "pagelist", method = RequestMethod.GET,
+    @RequestMapping(value = "pagelist", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity pagelist(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
-                                   @RequestParam(value = "pageSize", defaultValue = "5") int pageSize) {
+    public ResponseEntity pagelist(@RequestBody PageParam pageParam) {
         try {
-            Pageable pageable = forbidService.pageList(pageNo, pageSize);
+            Pageable pageable = forbidService.pageList(pageParam);
             Success ok = new Success(pageable, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
         } catch (CoreException e) {
@@ -72,7 +72,7 @@ public class ForbidController {
     @ResponseBody
     public ResponseEntity delete(@RequestParam("id") Long id) {
         try {
-           forbidService.delete(id);
+            forbidService.delete(id);
             Success ok = new Success("删除成功", "删除成功");
             return new ResponseEntity(ok, HttpStatus.OK);
         } catch (CoreException e) {

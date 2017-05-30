@@ -4,23 +4,24 @@ package com.vvboot.end.busi.entity;
  * Created by LONG on 2017/5/27.
  */
 public class Star {
-    private Long star;
+    private Long value;
 
-    private String name;
+    private String text;
 
-    public Long getStar() {
-        return star;
+
+    public Long getValue() {
+        return value;
     }
 
-    public void setStar(Long star) {
-        this.star = star;
+    public void setValue(Long value) {
+        this.value = value;
     }
 
-    public String getName() {
-        return name;
+    public String getText() {
+        return text;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setText(String text) {
+        this.text = text;
     }
 }

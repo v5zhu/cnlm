@@ -5,6 +5,6 @@
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="com.vvboot.end.busi.dao.StarDao">
     <select id="dropdown" resultType="com.vvboot.end.busi.entity.Star">
-        select * from t_bi_star order by star asc
+        select * from t_bi_star order by value asc
     </select>
 </mapper>

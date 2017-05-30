@@ -30,22 +30,47 @@
     <select id="detail" resultType="com.vvboot.end.busi.entity.Forbid" parameterType="long">
         select
             f.*,
-            bt.name typeName,
-            s.name starName
+            bt.text typeName,
+            s.text starName
         from t_b_forbid f
-        left join t_bi_forbid_type bt on bt.type=f.type
-        left join t_bi_star s on s.star=f.star
+        left join t_bi_forbid_type bt on bt.value=f.type
+        left join t_bi_star s on s.value=f.star
         where f.id=#{0}
     </select>
 
-    <select id="pageList" resultType="com.vvboot.end.busi.entity.Forbid">
+    <select id="pageList" resultType="com.vvboot.end.busi.entity.Forbid"
+            parameterType="com.vvboot.end.busi.params.PageParam">
         select
-            f.*,
-            bt.name typeName,
-            s.name starName
+        f.*,
+        bt.text typeName,
+        s.text starName
         from t_b_forbid f
-        left join t_bi_forbid_type bt on bt.type=f.type
-        left join t_bi_star s on s.star=f.star
+        left join t_bi_forbid_type bt on bt.value=f.type
+        left join t_bi_star s on s.value=f.star
+        <where>
+            <if test="filters.containsKey('type') and filters.type.size!=0">
+                f.type in
+                <foreach collection="filters.type" item="type" open="(" separator="," close=")">
+                    #{type}
+                </foreach>
+            </if>
+            <if test="filters.containsKey('star') and filters.star.size!=0">
+                and f.star in
+                <foreach collection="filters.star" item="star" open="(" separator="," close=")">
+                    #{star}
+                </foreach>
+            </if>
+        </where>
+        <choose>
+            <when test="sorts.size!=0">
+                <foreach collection="sorts" item="sort" open="order by " separator="," close="" index="i">
+                      ${sort.prop} ${sort.order}
+                </foreach>
+            </when>
+            <otherwise>
+                order by f.type asc,f.star desc
+            </otherwise>
+        </choose>
     </select>
 
     <delete id="delete" parameterType="long">

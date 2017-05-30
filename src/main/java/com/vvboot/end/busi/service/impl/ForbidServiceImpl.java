@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.vvboot.end.busi.dao.ForbidMybatisDao;
 import com.vvboot.end.busi.entity.Forbid;
+import com.vvboot.end.busi.params.PageParam;
 import com.vvboot.end.busi.service.ForbidService;
 import com.vvboot.end.core.commons.Pageable;
 import com.vvboot.end.utils.DateUtils;
@@ -46,10 +47,10 @@ public class ForbidServiceImpl implements ForbidService {
     }
 
     @Override
-    public Pageable pageList(int pageNo, int pageSize) {
-        logger.info("分页查询禁忌列表:pageNo:{},pageSize:{}", pageNo, pageSize);
-        PageHelper.startPage(pageNo, pageSize, true);
-        List<Forbid> list = forbidMybatisDao.pageList();
+    public Pageable pageList(PageParam pageParam) {
+        logger.info("分页查询禁忌列表:pageParam:{}", JSONObject.toJSONString(pageParam));
+        PageHelper.startPage(pageParam.getPageNum(),pageParam.getPageSize(), true);
+        List<Forbid> list = forbidMybatisDao.pageList(pageParam);
         PageInfo pageInfo = new PageInfo(list);
 
         Pageable pageable = BeanMapper.map(pageInfo, Pageable.class);
@@ -72,8 +73,8 @@ public class ForbidServiceImpl implements ForbidService {
     @Override
     @Transactional
     public void delete(Long id) {
-        logger.info("删除禁忌:{}",id);
-        int deleted=forbidMybatisDao.delete(id);
-        logger.info("删除禁忌结果:{}",deleted);
+        logger.info("删除禁忌:{}", id);
+        int deleted = forbidMybatisDao.delete(id);
+        logger.info("删除禁忌结果:{}", deleted);
     }
 }
