@@ -2,12 +2,14 @@ package com.vvboot.end;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author zhuxl@paxsz.com
  * @time 2017/5/4
  */
 @SpringBootApplication
+@EnableScheduling
 public class Application {
 
     public static void main(String[] args) {
