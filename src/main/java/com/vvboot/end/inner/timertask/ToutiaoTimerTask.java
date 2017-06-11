@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,7 @@ public class ToutiaoTimerTask {
     private ToutiaoMybatisDao toutiaoMybatisDao;
 
     @Transactional
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void updateToutiao() {
         logger.info("定时任务获取头条更新开始");
         JSONArray toutiao = ToutiaoApi.pullNews();
@@ -34,6 +36,7 @@ public class ToutiaoTimerTask {
     }
 
     @Transactional
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void deleteToutiao() {
         logger.info("定时任务删除时间超过10天的头条新闻");
         DateTime now = new DateTime();
