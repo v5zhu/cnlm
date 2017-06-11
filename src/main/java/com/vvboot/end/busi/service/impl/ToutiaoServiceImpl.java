@@ -1,5 +1,6 @@
 package com.vvboot.end.busi.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.vvboot.end.busi.dao.ToutiaoMybatisDao;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springside.modules.mapper.BeanMapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -41,5 +43,13 @@ public class ToutiaoServiceImpl implements ToutiaoService {
         pageObject.setList(toutiaoDtos);
 
         return pageObject;
+    }
+
+    @Override
+    public JSONArray authorList() {
+        logger.info("获取头条作者列表");
+        List<HashMap<String, Integer>> authors = toutiaoMybatisDao.findAuthors();
+        JSONArray array = JSONArray.parseArray(JSONArray.toJSONString(authors));
+        return array;
     }
 }

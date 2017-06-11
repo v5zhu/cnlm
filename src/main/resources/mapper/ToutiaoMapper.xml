@@ -73,4 +73,12 @@
         from t_b_toutiao
         where uniquekey=#{0}
     </select>
+    <select id="findAuthors" resultType="hashMap">
+        select  author_name as author,
+                count(1) as quantity
+        from t_b_toutiao
+        GROUP BY author_name
+        ORDER BY count(1) desc
+        limit 10
+    </select>
 </mapper>
