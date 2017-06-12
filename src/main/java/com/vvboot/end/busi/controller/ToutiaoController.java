@@ -1,5 +1,6 @@
 package com.vvboot.end.busi.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.vvboot.end.busi.dto.ToutiaoDto;
 import com.vvboot.end.busi.service.ToutiaoService;
 import com.vvboot.end.core.commons.Pageable;
@@ -37,6 +38,19 @@ public class ToutiaoController {
         try {
             Pageable<ToutiaoDto> toutiaoDtos = toutiaoService.listToutiao(page, pageSize);
             Success ok = new Success(toutiaoDtos, "更新成功");
+            return new ResponseEntity(ok, HttpStatus.OK);
+        } catch (CoreException e) {
+            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(value = "authors", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity authorList() {
+        try {
+            JSONArray array = toutiaoService.authorList();
+            Success ok = new Success(array, "更新成功");
             return new ResponseEntity(ok, HttpStatus.OK);
         } catch (CoreException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);

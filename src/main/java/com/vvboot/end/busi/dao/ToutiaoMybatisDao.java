@@ -4,6 +4,7 @@ import com.vvboot.end.busi.entity.Toutiao;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,4 +30,6 @@ public interface ToutiaoMybatisDao {
     int findApprovalAmountById(String objectId);
 
     int findOpposeAmountById(String objectId);
+
+    List<HashMap<String,Integer>> findAuthors();
 }
