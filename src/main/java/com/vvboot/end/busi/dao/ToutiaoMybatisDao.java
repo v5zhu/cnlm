@@ -1,6 +1,7 @@
 package com.vvboot.end.busi.dao;
 
 import com.vvboot.end.busi.entity.Toutiao;
+import com.vvboot.end.busi.params.PageParam;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
@@ -19,7 +20,7 @@ public interface ToutiaoMybatisDao {
 
     int deleteToutiaoBefore10(Date date);
 
-    List<Toutiao> findAll();
+    List<Toutiao> findAll(PageParam pageParam);
 
     void increaseApprovalAmount(String id);
 

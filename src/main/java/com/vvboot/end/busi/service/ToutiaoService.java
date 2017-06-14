@@ -3,6 +3,7 @@ package com.vvboot.end.busi.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.vvboot.end.busi.dto.ToutiaoDto;
+import com.vvboot.end.busi.params.PageParam;
 import com.vvboot.end.core.commons.Pageable;
 
 /**
@@ -12,7 +13,7 @@ public interface ToutiaoService {
     /** 拉取头条更新
      * @return
      */
-    Pageable<ToutiaoDto> listToutiao(int pageNo, int pageSize);
+    Pageable<ToutiaoDto> listToutiao(PageParam pageParam);
 
     /**作者列表
      * @return

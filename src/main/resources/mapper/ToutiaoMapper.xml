@@ -40,8 +40,24 @@
             tt.date DESC
         LIMIT #{limit} OFFSET #{offset}
     </select>
-    <select id="findAll" resultType="com.vvboot.end.busi.entity.Toutiao">
-        select * from t_b_toutiao tt ORDER BY tt.date DESC
+    <select id="findAll" resultType="com.vvboot.end.busi.entity.Toutiao" parameterType="com.vvboot.end.busi.params.PageParam">
+        select * from t_b_toutiao tt
+        <where>
+            <if test="filters.containsKey('author')">
+                tt.author_name=#{filters.author}
+            </if>
+        </where>
+        <choose>
+            <when test="sorts.size!=0">
+                <foreach collection="sorts" item="sort" open="order by " separator="," close="" index="i">
+                    ${sort.prop} ${sort.order}
+                </foreach>
+                ,tt.date desc
+            </when>
+            <otherwise>
+                order by tt.date desc
+            </otherwise>
+        </choose>
     </select>
     <delete id="deleteToutiaoBefore10" parameterType="java.util.Date">
         delete from t_b_toutiao where date <![CDATA[<]]> #{0}

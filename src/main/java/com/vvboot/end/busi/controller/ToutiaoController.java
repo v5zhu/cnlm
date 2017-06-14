@@ -2,6 +2,7 @@ package com.vvboot.end.busi.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.vvboot.end.busi.dto.ToutiaoDto;
+import com.vvboot.end.busi.params.PageParam;
 import com.vvboot.end.busi.service.ToutiaoService;
 import com.vvboot.end.core.commons.Pageable;
 import com.vvboot.end.core.commons.Success;
@@ -13,10 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by zhuxl@paxsz.com on 2016/7/27.
@@ -30,13 +28,12 @@ public class ToutiaoController {
     @Autowired
     private ToutiaoService toutiaoService;
 
-    @RequestMapping(value = "overview", method = RequestMethod.GET,
+    @RequestMapping(value = "overview", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity pull(@RequestParam(value = "page", defaultValue = "1") int page,
-                               @RequestParam(value = "pageSize", defaultValue = "30") int pageSize) {
+    public ResponseEntity pull(@RequestBody PageParam pageParam) {
         try {
-            Pageable<ToutiaoDto> toutiaoDtos = toutiaoService.listToutiao(page, pageSize);
+            Pageable<ToutiaoDto> toutiaoDtos = toutiaoService.listToutiao(pageParam);
             Success ok = new Success(toutiaoDtos, "更新成功");
             return new ResponseEntity(ok, HttpStatus.OK);
         } catch (CoreException e) {
