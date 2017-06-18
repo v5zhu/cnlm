@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.vvboot.end.busi.dao.OvertimeDao">
+    <insert id="addOvertime" parameterType="com.vvboot.end.busi.entity.Overtime" useGeneratedKeys="true" keyProperty="id">
+        insert into t_b_overtime(
+        reason,people,start_time,end_time,week,clock,taxi,cost,remark,create_time,update_time
+        )
+        values(
+        #{reason},#{people},#{startTime},#{endTime},#{week},#{clock},#{taxi},#{cost},#{remark},#{createTime},#{updateTime}
+        )
+    </insert>
+
+    <select id="pageList" resultType="com.vvboot.end.busi.entity.Overtime"
+            parameterType="com.vvboot.end.busi.params.PageParam">
+        select
+        o.*
+        from t_b_overtime o
+        <where>
+            <if test="filters.containsKey('week') and filters.week.size!=0">
+                o.week in
+                <foreach collection="filters.week" item="week" open="(" separator="," close=")">
+                    #{week}
+                </foreach>
+            </if>
+        </where>
+        <choose>
+            <when test="sorts.size!=0">
+                <foreach collection="sorts" item="sort" open="order by " separator="," close="" index="i">
+                      ${sort.prop} ${sort.order}
+                </foreach>
+                ,o.start_time desc
+            </when>
+            <otherwise>
+                order by o.start_time desc
+            </otherwise>
+        </choose>
+    </select>
+</mapper>
