@@ -15,6 +15,8 @@ public class Student {
     private Date createTime;
     private Date updateTime;
 
+    private SchoolOrganization organization;
+
     public Long getId() {
         return id;
     }
@@ -77,5 +79,13 @@ public class Student {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public SchoolOrganization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(SchoolOrganization organization) {
+        this.organization = organization;
     }
 }
