@@ -14,6 +14,7 @@ public class Student {
     private String address;
     private Date createTime;
     private Date updateTime;
+    private String remark;
 
     private SchoolOrganization organization;
 
@@ -87,5 +88,13 @@ public class Student {
 
     public void setOrganization(SchoolOrganization organization) {
         this.organization = organization;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.vvboot.end.busi.dao.StudentDao">
+    <insert id="addStudent" parameterType="com.vvboot.end.busi.entity.Student" useGeneratedKeys="true" keyProperty="id">
+        insert into t_b_student(
+        name,age,grade,phone,address,create_time,update_time,remark
+        )
+        values(
+        #{name},#{age},#{grade},#{phone},#{address},#{create_time},#{update_time},#{remark}
+        )
+    </insert>
+
+    <select id="dropdown" resultType="com.vvboot.end.busi.entity.Student">
+        select s.id,s.name
+        from t_b_student s order by s.create_time desc
+    </select>
+    <resultMap id="studentMap" type="com.vvboot.end.busi.entity.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="grade" property="grade"/>
+        <result column="phone" property="phone"/>
+        <result column="address" property="address"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="remark" property="remark"/>
+
+        <result column="org_id" property="organization.id"/>
+        <result column="org_name" property="organization.name"/>
+        <result column="org_boss" property="organization.boss"/>
+        <result column="org_address" property="organization.address"/>
+        <result column="org_create_time" property="organization.createTime"/>
+        <result column="org_update_time" property="organization.updateTime"/>
+        <result column="org_remark" property="organization.remark"/>
+    </resultMap>
+    <select id="pageList" resultMap="studentMap"
+            parameterType="com.vvboot.end.busi.params.PageParam">
+        select
+        s.*,
+        so.id org_id,
+        so.name org_name,
+        so.boss org_boss,
+        so.address org_address,
+        so.create_time org_create_time,
+        so.update_time org_update_time,
+        so.remark org_remark
+        from t_b_student s
+        left join t_b_school_organization so on so.id=s.org_id
+        <where>
+            <if test="filters.containsKey('name') and filters.name.size!=0">
+                s.name in
+                <foreach collection="filters.name" item="name" open="(" separator="," close=")">
+                    #{name}
+                </foreach>
+            </if>
+        </where>
+        <choose>
+            <when test="sorts.size!=0">
+                <foreach collection="sorts" item="sort" open="order by " separator="," close="" index="i">
+                      ${sort.prop} ${sort.order}
+                </foreach>
+                ,s.create_time desc
+            </when>
+            <otherwise>
+                order by s.create_time desc
+            </otherwise>
+        </choose>
+    </select>
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.vvboot.end.busi.dao.TrainDao">
+    <insert id="addTrain" parameterType="com.vvboot.end.busi.entity.Train" useGeneratedKeys="true" keyProperty="id">
+        insert into t_b_train(
+        month,day,week,clock,type,org_id,student_id,start_time,end_time,hours,salary,teacher,create_time,update_time,remark
+        )
+        values(
+        #{month},#{day},#{week},#{clock},#{type},#{organization.id},#{student.id},#{startTime},#{endTime},#{hours},#{salary},#{teacher},#{createTime},#{updateTime},#{remark}
+        )
+    </insert>
+
+    <resultMap id="trainMap" type="com.vvboot.end.busi.entity.Train">
+        <id column="id" property="id"/>
+        <result column="month" property="month"/>
+        <result column="day" property="day"/>
+        <result column="week" property="week"/>
+        <result column="clock" property="clock"/>
+        <result column="type" property="type"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="hours" property="hours"/>
+        <result column="salary" property="salary"/>
+        <result column="teacher" property="teacher"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="remark" property="remark"/>
+
+        <result column="org_id" property="organization.id"/>
+        <result column="org_name" property="organization.name"/>
+        <result column="org_boss" property="organization.boss"/>
+        <result column="org_address" property="organization.address"/>
+        <result column="org_create_time" property="organization.createTime"/>
+        <result column="org_update_time" property="organization.updateTime"/>
+        <result column="org_remark" property="organization.remark"/>
+
+        <result column="stu_id" property="student.id"/>
+        <result column="stu_name" property="student.name"/>
+        <result column="stu_age" property="student.age"/>
+        <result column="stu_grade" property="student.grade"/>
+        <result column="stu_phone" property="student.phone"/>
+        <result column="stu_address" property="student.address"/>
+        <result column="stu_create_time" property="student.createTime"/>
+        <result column="stu_update_time" property="student.updateTime"/>
+        <result column="stu_remark" property="student.remark"/>
+    </resultMap>
+    <select id="pageList" resultMap="trainMap"
+            parameterType="com.vvboot.end.busi.params.PageParam">
+        select
+        t.*,
+        so.id org_id,
+        so.name org_name,
+        so.boss org_boss,
+        so.address org_address,
+        so.create_time org_create_time,
+        so.update_time org_update_time,
+        so.remark org_remark,
+        s.id stu_id,
+        s.name stu_name,
+        s.age stu_age,
+        s.grade stu_grade,
+        s.phone stu_phone,
+        s.address stu_address,
+        s.create_time stu_create_time,
+        s.update_time stu_update_time,
+        s.remark stu_remark
+        from t_b_train t
+        left join t_b_school_organization so on so.id=t.org_id
+        left join t_b_student s on s.id=t.student_id
+        <where>
+            <if test="filters.containsKey('month') and filters.month.size!=0">
+                t.month in
+                <foreach collection="filters.month" item="month" open="(" separator="," close=")">
+                    #{month}
+                </foreach>
+            </if>
+            <if test="filters.containsKey('type') and filters.type.size!=0">
+                and t.type in
+                <foreach collection="filters.type" item="type" open="(" separator="," close=")">
+                    #{type}
+                </foreach>
+            </if>
+            <if test="filters.containsKey('organization') and filters.organization.size!=0">
+                and t.org_id in
+                <foreach collection="filters.organization" item="organization" open="(" separator="," close=")">
+                    #{organization}
+                </foreach>
+            </if>
+            <if test="filters.containsKey('student') and filters.student.size!=0">
+                and t.student_id in
+                <foreach collection="filters.student" item="student" open="(" separator="," close=")">
+                    #{student}
+                </foreach>
+            </if>
+        </where>
+        <choose>
+            <when test="sorts.size!=0">
+                <foreach collection="sorts" item="sort" open="order by " separator="," close="" index="i">
+                      ${sort.prop} ${sort.order}
+                </foreach>
+                ,t.create_time desc
+            </when>
+            <otherwise>
+                order by t.create_time desc
+            </otherwise>
+        </choose>
+    </select>
+</mapper>
