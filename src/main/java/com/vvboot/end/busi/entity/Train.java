@@ -12,8 +12,6 @@ public class Train {
     private Integer week;
     private Integer clock;
     private String type;
-    private Long orgId;
-    private Long studentId;
     private Date startTime;
     private Date endTime;
     private String hours;
@@ -22,6 +20,11 @@ public class Train {
     private Date createTime;
     private Date updateTime;
     private String remark;
+
+    //关联属性
+    private SchoolOrganization organization;
+
+    private Student student;
 
     public Long getId() {
         return id;
@@ -69,22 +72,6 @@ public class Train {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public Long getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(Long orgId) {
-        this.orgId = orgId;
-    }
-
-    public Long getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
     }
 
     public Date getStartTime() {
@@ -149,5 +136,21 @@ public class Train {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public SchoolOrganization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(SchoolOrganization organization) {
+        this.organization = organization;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
