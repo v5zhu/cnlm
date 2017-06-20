@@ -6,10 +6,10 @@
 <mapper namespace="com.vvboot.end.busi.dao.SchoolOrganizationDao">
     <insert id="addOrganization" parameterType="com.vvboot.end.busi.entity.SchoolOrganization" useGeneratedKeys="true" keyProperty="id">
         insert into t_b_school_organization(
-        name,boos,address,create_time,update_time,remark
+        name,boss,address,create_time,update_time,remark
         )
         values(
-        #{name},#{boos},#{address},#{create_time},#{update_time},#{remark}
+        #{name},#{boss},#{address},#{createTime},#{updateTime},#{remark}
         )
     </insert>
 

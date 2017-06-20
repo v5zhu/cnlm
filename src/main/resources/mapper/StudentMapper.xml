@@ -6,10 +6,10 @@
 <mapper namespace="com.vvboot.end.busi.dao.StudentDao">
     <insert id="addStudent" parameterType="com.vvboot.end.busi.entity.Student" useGeneratedKeys="true" keyProperty="id">
         insert into t_b_student(
-        name,age,grade,phone,address,create_time,update_time,remark
+        org_id,name,age,grade,phone,address,create_time,update_time,remark
         )
         values(
-        #{name},#{age},#{grade},#{phone},#{address},#{create_time},#{update_time},#{remark}
+        #{organization.id},#{name},#{age},#{grade},#{phone},#{address},#{createTime},#{updateTime},#{remark}
         )
     </insert>
 
