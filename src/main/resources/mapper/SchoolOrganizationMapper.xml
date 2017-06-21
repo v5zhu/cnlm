@@ -36,7 +36,7 @@
                 <foreach collection="sorts" item="sort" open="order by " separator="," close="" index="i">
                       ${sort.prop} ${sort.order}
                 </foreach>
-                ,so.start_time desc
+                ,so.create_time desc
             </when>
             <otherwise>
                 order by so.create_time desc
