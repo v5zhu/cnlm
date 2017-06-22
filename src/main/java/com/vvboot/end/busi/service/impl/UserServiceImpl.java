@@ -10,7 +10,7 @@ import com.vvboot.end.busi.params.LoginParam;
 import com.vvboot.end.busi.params.PerfectInfoParam;
 import com.vvboot.end.busi.params.RegisterParam;
 import com.vvboot.end.busi.service.UserService;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import com.vvboot.end.core.exception.InnerException;
 import com.vvboot.end.utils.PasswordEncryptionUtil;
 import com.vvboot.end.utils.StringUtils;
@@ -50,28 +50,28 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void register(RegisterParam registerParam) throws CoreException {
+    public void register(RegisterParam registerParam) throws LeeBaoException {
         String error = ValidatorUtils.validate(validator, registerParam);
         if (error != null) {
-            throw new CoreException(error);
+            throw new LeeBaoException(error);
         }
         //判定密码和确认密码是否一样
         if (!registerParam.getPassword().equals(registerParam.getConfirmPassword())) {
-            throw new CoreException("两次密码不一致");
+            throw new LeeBaoException("两次密码不一致");
         }
         //判定手机号是否已注册
         int count1 = userMybatisDao.checkIsRegisteredByPhone(registerParam.getPhone());
         if (count1 > 0) {
-            throw new CoreException("手机号已注册");
+            throw new LeeBaoException("手机号已注册");
         }
         //判定验证码是否正确
         PhoneCode phoneCode = phoneCodeMybatisDao.findByPhone(registerParam.getPhone());
         if (phoneCode == null) {
-            throw new CoreException("未生成验证码");
+            throw new LeeBaoException("未生成验证码");
         } else {
             if (!registerParam.getCode().equals(phoneCode.getPresCode())) {
                 //验证码不同
-                throw new CoreException("验证码错误");
+                throw new LeeBaoException("验证码错误");
             }
         }
 
@@ -104,19 +104,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto login(LoginParam loginParam) throws CoreException {
+    public UserDto login(LoginParam loginParam) throws LeeBaoException {
         //todo 加入登录日志
         String loginName = loginParam.getLoginName();
         String password = loginParam.getPassword();
         AuthCenter authCenter = authCenterMybatisDao.findAuthByLoginName(loginName);
         if (authCenter == null) {
             logger.info("通过登录名[{}]查询不到登录信息", loginName);
-            throw new CoreException("非法登录");
+            throw new LeeBaoException("非法登录");
         }
         boolean success = PasswordEncryptionUtil.authenticate(password, authCenter.getPassword(), authCenter.getSalt());
         if (!success) {
             logger.info("登录账号[{}]密码[{}]错误", loginName, password);
-            throw new CoreException("密码错误");
+            throw new LeeBaoException("密码错误");
         }
         User user = userMybatisDao.findByToken(authCenter.getUserId());
         return BeanMapper.map(user, UserDto.class);
@@ -124,11 +124,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void perfectUserInfo(PerfectInfoParam perfectInfoParam) throws CoreException {
+    public void perfectUserInfo(PerfectInfoParam perfectInfoParam) throws LeeBaoException {
         try {
             String error = ValidatorUtils.validate(validator, perfectInfoParam);
             if (error != null) {
-                throw new CoreException(error);
+                throw new LeeBaoException(error);
             }
             UserInfo infoType = UserInfo.valueOf(perfectInfoParam.getType());
             Map params = new HashMap();
@@ -149,10 +149,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserInfo(String uid) throws CoreException {
+    public UserDto getUserInfo(String uid) throws LeeBaoException {
         User user = userMybatisDao.findByToken(uid);
         if (user == null) {
-            throw new CoreException("非法操作");
+            throw new LeeBaoException("非法操作");
         }
         UserDto userDto = BeanMapper.map(user, UserDto.class);
         return userDto;

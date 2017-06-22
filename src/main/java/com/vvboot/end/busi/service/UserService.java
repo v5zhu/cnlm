@@ -4,7 +4,7 @@ import com.vvboot.end.busi.dto.UserDto;
 import com.vvboot.end.busi.params.LoginParam;
 import com.vvboot.end.busi.params.PerfectInfoParam;
 import com.vvboot.end.busi.params.RegisterParam;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 
 /**
  * Created by zhuxl on 2015/5/20.
@@ -17,16 +17,16 @@ public interface UserService {
      * @param registerParam
      * @throws Exception
      */
-    void register(RegisterParam registerParam) throws CoreException;
+    void register(RegisterParam registerParam) throws LeeBaoException;
 
     /**
      * 用户登录，登录成功返回uid
      *
      * @param loginParam
      * @return
-     * @throws CoreException
+     * @throws LeeBaoException
      */
-    UserDto login(LoginParam loginParam) throws CoreException;
+    UserDto login(LoginParam loginParam) throws LeeBaoException;
 
     /**
      * 完善用户信息，单项更新
@@ -34,12 +34,12 @@ public interface UserService {
      * @param perfectInfoParam
      * @throws Exception
      */
-    void perfectUserInfo(PerfectInfoParam perfectInfoParam) throws CoreException;
+    void perfectUserInfo(PerfectInfoParam perfectInfoParam) throws LeeBaoException;
 
     /**获取用户详情
      * @param uid
      * @return
-     * @throws CoreException
+     * @throws LeeBaoException
      */
-    UserDto getUserInfo(String uid) throws CoreException;
+    UserDto getUserInfo(String uid) throws LeeBaoException;
 }

@@ -6,7 +6,7 @@ import com.vvboot.end.busi.params.PageParam;
 import com.vvboot.end.busi.service.ToutiaoService;
 import com.vvboot.end.core.commons.Pageable;
 import com.vvboot.end.core.commons.Success;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class ToutiaoController {
             Pageable<ToutiaoDto> toutiaoDtos = toutiaoService.listToutiao(pageParam);
             Success ok = new Success(toutiaoDtos, "更新成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -49,7 +49,7 @@ public class ToutiaoController {
             JSONArray array = toutiaoService.authorList();
             Success ok = new Success(array, "更新成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }

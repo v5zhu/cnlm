@@ -5,7 +5,7 @@ import com.vvboot.end.busi.dao.UserMybatisDao;
 import com.vvboot.end.busi.entity.PhoneCode;
 import com.vvboot.end.busi.enums.PhoneVerifyResult;
 import com.vvboot.end.busi.service.PhoneService;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import com.vvboot.end.utils.DateUtils;
 import com.vvboot.end.utils.SmsUtil;
 import com.vvboot.end.utils.StringUtils;
@@ -43,16 +43,16 @@ public class PhoneServiceImpl implements PhoneService {
     PhoneCodeMybatisDao phoneCodeMybatisDao;
 
     @Override
-    public void checkPhone(String phone) throws CoreException {
+    public void checkPhone(String phone) throws LeeBaoException {
         String mbl = userMybatisDao.checkPhone(phone);
         if (org.apache.commons.lang.StringUtils.isNotBlank(mbl)) {
-            throw new CoreException("手机号已注册");
+            throw new LeeBaoException("手机号已注册");
         }
     }
 
     @Override
     @Transactional
-    public void generatePhoneCode(String phone) throws CoreException {
+    public void generatePhoneCode(String phone) throws LeeBaoException {
         String code = StringUtils.generate6PhoneCode();
         Date now = DateUtils.nowTime();
 
@@ -73,7 +73,7 @@ public class PhoneServiceImpl implements PhoneService {
             //该手机号生成过验证码，再次生成
             if (1 * 60 * 1000 > (now.getTime() - phoneCode.getPresTime().getTime())) {
                 //发送验证码1分钟只能点击发送1次；
-                throw new CoreException("发送验证过于频繁");
+                throw new LeeBaoException("发送验证过于频繁");
             }
             //累加次数
             phoneCode.setTimes(phoneCode.getTimes() + 1);
@@ -93,23 +93,23 @@ public class PhoneServiceImpl implements PhoneService {
 
     @Override
     @Transactional
-    public void verifyPhoneCode(String phone, String code) throws CoreException {
+    public void verifyPhoneCode(String phone, String code) throws LeeBaoException {
         PhoneCode phoneCode = phoneCodeMybatisDao.findByPhone(phone);
         if (phoneCode == null) {
             //手机号错误
-            throw new CoreException("非法操作");
+            throw new LeeBaoException("非法操作");
         }
         //判定时间是否在expired分钟内
         Date now = DateUtils.nowTime();
         long expired = SmsUtil.SMS_CODE_EXPIRED;
         if (expired * 60 * 1000 < (now.getTime() - phoneCode.getPresTime().getTime())) {
-            throw new CoreException("验证码已过期,请重新获取");
+            throw new LeeBaoException("验证码已过期,请重新获取");
         }
         if (phoneCode.getPresCode().equals(code)) {
             //equals
             //只允许验证1次,验证1次后失效
             if (phoneCode.getVerifyTimes() == 1) {
-                throw new CoreException("");
+                throw new LeeBaoException("");
             }
             phoneCode.setVerifyTimes(1);
             phoneCode.setPrevVerifyResult(phoneCode.getPresVerifyResult());
@@ -117,7 +117,7 @@ public class PhoneServiceImpl implements PhoneService {
             //update phoneCode
             phoneCodeMybatisDao.updatePhoneCode(phoneCode);
         } else {
-            throw new CoreException("验证码错误");
+            throw new LeeBaoException("验证码错误");
         }
     }
 }

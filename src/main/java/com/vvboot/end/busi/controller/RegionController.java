@@ -3,7 +3,7 @@ package com.vvboot.end.busi.controller;
 import com.vvboot.end.busi.dto.init.area.*;
 import com.vvboot.end.busi.service.RegionService;
 import com.vvboot.end.core.commons.Success;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class RegionController {
             List<ProvinceDto> provinces = regionService.findProvinces();
             Success ok = new Success(provinces, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -52,7 +52,7 @@ public class RegionController {
             List<CityDto> cities = regionService.findCities(provinceCode);
             Success ok = new Success(cities, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -66,7 +66,7 @@ public class RegionController {
             List<DistrictDto> districts = regionService.findDistricts(cityCode);
             Success ok = new Success(districts, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -80,7 +80,7 @@ public class RegionController {
             List<TownDto> towns = regionService.findTowns(districtCode);
             Success ok = new Success(towns, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -94,7 +94,7 @@ public class RegionController {
             List<VillageDto> villages = regionService.findVillages(townCode);
             Success ok = new Success(villages, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }

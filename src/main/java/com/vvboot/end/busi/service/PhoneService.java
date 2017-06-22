@@ -1,7 +1,7 @@
 package com.vvboot.end.busi.service;
 
 
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 
 /*
  * ============================================================================		
@@ -25,14 +25,14 @@ public interface PhoneService {
      *
      * @param phone
      */
-    void checkPhone(String phone) throws CoreException;
+    void checkPhone(String phone) throws LeeBaoException;
 
     /**
      * 生成手机验证码
      *
      * @param phone 手机号
      */
-    void generatePhoneCode(String phone) throws CoreException;
+    void generatePhoneCode(String phone) throws LeeBaoException;
 
     /**
      * 验证手机验证码是否正确
@@ -40,5 +40,5 @@ public interface PhoneService {
      * @param phone
      * @param code
      */
-    void verifyPhoneCode(String phone, String code) throws CoreException;
+    void verifyPhoneCode(String phone, String code) throws LeeBaoException;
 }

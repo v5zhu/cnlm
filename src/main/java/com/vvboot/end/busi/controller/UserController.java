@@ -8,7 +8,7 @@ import com.vvboot.end.busi.params.RegisterParam;
 import com.vvboot.end.busi.params.UniqueParam;
 import com.vvboot.end.busi.service.UserService;
 import com.vvboot.end.core.commons.Success;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class UserController {
             userService.register(registerParam);
             Success ok = new Success( "注册成功", "恭喜你!注册成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -57,7 +57,7 @@ public class UserController {
             UserDto userDto = userService.login(loginParam);
             Success ok = new Success( userDto, "恭喜你!登录成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -71,7 +71,7 @@ public class UserController {
             userService.perfectUserInfo(infoParam);
             Success ok = new Success( "更新成功", "恭喜你!资料更新成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -85,7 +85,7 @@ public class UserController {
             UserDto userDto = userService.getUserInfo(uniqueParam.getUid());
             Success ok = new Success(userDto, "查询成功");
             return new ResponseEntity(userDto, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }

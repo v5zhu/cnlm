@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.vvboot.end.busi.dto.article.ArticleCommentReplyDto;
 import com.vvboot.end.busi.service.ArticleCommentReplyService;
 import com.vvboot.end.core.commons.Success;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import com.vvboot.end.core.exception.InnerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class ArticleCommentReplyController {
             ArticleCommentReplyDto reply = articleCommentReplyService.addReply(replyDto);
             Success ok = new Success(reply, "回复成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
@@ -55,7 +55,7 @@ public class ArticleCommentReplyController {
             List<ArticleCommentReplyDto> replyDtos = articleCommentReplyService.replyList(commentId);
             Success ok = new Success(replyDtos, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);

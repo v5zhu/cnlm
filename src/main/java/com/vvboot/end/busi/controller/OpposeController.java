@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.vvboot.end.busi.dto.common.OpposeDto;
 import com.vvboot.end.busi.service.OpposeService;
 import com.vvboot.end.core.commons.Success;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import com.vvboot.end.core.exception.InnerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +40,7 @@ public class OpposeController {
             int amount = opposeService.makeOppose(opposeDto);
             Success ok = new Success(amount, "反对成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }catch (InnerException e) {
             return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);

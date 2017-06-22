@@ -15,7 +15,7 @@ import com.vvboot.end.busi.entity.init.article.ArticleTag;
 import com.vvboot.end.busi.entity.init.article.ArticleType;
 import com.vvboot.end.busi.service.ArticleService;
 import com.vvboot.end.core.commons.Pageable;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import com.vvboot.end.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class ArticleServiceImpl implements ArticleService {
         //校验dto属性
         User author = userMybatisDao.findByUserId(articleDto.getUserId());
         if (author == null) {
-            throw new CoreException("非法操作");
+            throw new LeeBaoException("非法操作");
         }
         Article article = BeanMapper.map(articleDto, Article.class);
         //articleId为空新增，不为空修改

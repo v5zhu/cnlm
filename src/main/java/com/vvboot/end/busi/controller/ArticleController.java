@@ -7,7 +7,7 @@ import com.vvboot.end.busi.entity.init.article.ArticleType;
 import com.vvboot.end.busi.service.ArticleService;
 import com.vvboot.end.core.commons.Pageable;
 import com.vvboot.end.core.commons.Success;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import com.vvboot.end.core.exception.InnerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +42,7 @@ public class ArticleController {
             ArticleDto article = articleService.writeArticle(articleDto);
             Success ok = new Success(article, "保存成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
@@ -58,7 +58,7 @@ public class ArticleController {
             ArticleDto article = articleService.articleDetail(id);
             Success ok = new Success(article, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
@@ -76,7 +76,7 @@ public class ArticleController {
             Pageable<ArticleDto> articles = articleService.articleList(uid, page, pageSize);
             Success ok = new Success(articles, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
@@ -92,7 +92,7 @@ public class ArticleController {
             List<ArticleType> types = articleService.typeList();
             Success ok = new Success(types, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
@@ -108,7 +108,7 @@ public class ArticleController {
             List<ArticleCategory> categories = articleService.findCategoriesByParentCategory(parentCategory);
             Success ok = new Success(categories, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);

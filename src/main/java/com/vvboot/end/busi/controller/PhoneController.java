@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.vvboot.end.busi.dto.PhoneCodeDto;
 import com.vvboot.end.busi.service.PhoneService;
 import com.vvboot.end.core.commons.Success;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import com.vvboot.end.core.exception.InnerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,7 @@ public class PhoneController {
             phoneService.checkPhone(phone.getString("phone"));
             Success ok = new Success(null, "恭喜你，该号码可用");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             logger.info("异常:", e);
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
@@ -52,7 +52,7 @@ public class PhoneController {
             phoneService.generatePhoneCode(phone);
             Success ok = new Success( "操作成功", "生成验证码成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             logger.info("异常:", e);
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
@@ -69,7 +69,7 @@ public class PhoneController {
             phoneService.verifyPhoneCode(phoneCodeDto.getPhone(), phoneCodeDto.getPresCode());
             Success ok = new Success(null, "恭喜你，验证成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             logger.info("异常:", e);
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {

@@ -3,7 +3,7 @@ package com.vvboot.end.busi.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.vvboot.end.busi.service.StarService;
 import com.vvboot.end.core.commons.Success;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class StarController {
             JSONArray array = starService.dropdown();
             Success ok = new Success(array, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }

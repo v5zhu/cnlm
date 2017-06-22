@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.vvboot.end.busi.params.DencryptParam;
 import com.vvboot.end.busi.service.ToolsService;
 import com.vvboot.end.core.commons.Success;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class ToolsController {
             String result = toolsService.dateFormat(src, format, type);
             Success ok = new Success(result, "格式化成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -50,7 +50,7 @@ public class ToolsController {
             String result = toolsService.codec(src, type);
             Success ok = new Success(result, "编解码成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -64,7 +64,7 @@ public class ToolsController {
             JSONObject output = toolsService.dencrypt(dencryptParam);
             Success ok = new Success(output, "加解密成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }

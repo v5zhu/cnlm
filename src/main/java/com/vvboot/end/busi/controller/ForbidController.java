@@ -5,7 +5,7 @@ import com.vvboot.end.busi.params.PageParam;
 import com.vvboot.end.busi.service.ForbidService;
 import com.vvboot.end.core.commons.Pageable;
 import com.vvboot.end.core.commons.Success;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class ForbidController {
             forbidService.addForbid(forbid);
             Success ok = new Success("添加成功", "恭喜你!添加成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -49,7 +49,7 @@ public class ForbidController {
             Forbid forbid = forbidService.detail(id);
             Success ok = new Success(forbid, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -62,7 +62,7 @@ public class ForbidController {
             Pageable pageable = forbidService.pageList(pageParam);
             Success ok = new Success(pageable, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -75,7 +75,7 @@ public class ForbidController {
             forbidService.delete(id);
             Success ok = new Success("删除成功", "删除成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -89,7 +89,7 @@ public class ForbidController {
             forbidService.update(forbid);
             Success ok = new Success("修改成功", "修改成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }

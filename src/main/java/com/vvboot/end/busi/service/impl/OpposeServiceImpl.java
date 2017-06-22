@@ -9,7 +9,7 @@ import com.vvboot.end.busi.dao.common.OpposeMybatisDao;
 import com.vvboot.end.busi.dto.common.OpposeDto;
 import com.vvboot.end.busi.entity.common.Oppose;
 import com.vvboot.end.busi.service.OpposeService;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import com.vvboot.end.utils.ValidatorUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class OpposeServiceImpl implements OpposeService {
     public int makeOppose(OpposeDto opposeDto) {
         String error = ValidatorUtils.validate(validator, opposeDto);
         if (error != null) {
-            throw new CoreException(error);
+            throw new LeeBaoException(error);
         }
 
         int opposeAmount = 0;
@@ -83,7 +83,7 @@ public class OpposeServiceImpl implements OpposeService {
             }
             return opposeAmount;
         } else {
-            throw new CoreException("重复操作");
+            throw new LeeBaoException("重复操作");
         }
     }
 }

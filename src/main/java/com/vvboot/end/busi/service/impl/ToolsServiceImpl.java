@@ -3,7 +3,7 @@ package com.vvboot.end.busi.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.vvboot.end.busi.params.DencryptParam;
 import com.vvboot.end.busi.service.ToolsService;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import com.vvboot.end.core.exception.InnerException;
 import com.vvboot.end.utils.CodecUtils;
 import com.vvboot.end.utils.DateUtils;
@@ -59,7 +59,7 @@ public class ToolsServiceImpl implements ToolsService {
         try {
             String error = ValidatorUtils.validate(validator, dencryptParam);
             if (error != null) {
-                throw new CoreException(error);
+                throw new LeeBaoException(error);
             }
             JSONObject output = new JSONObject();
             switch (dencryptParam.getArithmetic()) {
@@ -73,7 +73,7 @@ public class ToolsServiceImpl implements ToolsService {
                         byte[] bytes = md.digest();
                         output.put("output", encoder.encode(bytes));
                     } else if ("decrypt".equals(dencryptParam.getMethod())) {
-                        throw new CoreException("非法操作");
+                        throw new LeeBaoException("非法操作");
                     }
                     break;
                 case "MD5":
@@ -94,10 +94,10 @@ public class ToolsServiceImpl implements ToolsService {
 //                }
                     break;
                 default:
-                    throw new CoreException("非法操作");
+                    throw new LeeBaoException("非法操作");
             }
             return output;
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             throw e;
         } catch (Exception e) {
             throw new InnerException("内部错误");

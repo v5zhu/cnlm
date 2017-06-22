@@ -3,11 +3,11 @@ package com.vvboot.end.core.exception;
 /**
  * Created by LONG on 2017/5/4.
  */
-public class CoreException extends RuntimeException {
+public class LeeBaoException extends RuntimeException {
     private int errorCode = 400000;
     private String error = "操作失败";
 
-    public CoreException(String error) {
+    public LeeBaoException(String error) {
         super(error);
         this.error = error;
     }

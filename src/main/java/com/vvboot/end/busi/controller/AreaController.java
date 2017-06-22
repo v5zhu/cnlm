@@ -3,7 +3,7 @@ package com.vvboot.end.busi.controller;
 import com.vvboot.end.busi.dto.init.area.*;
 import com.vvboot.end.busi.service.AreaService;
 import com.vvboot.end.core.commons.Success;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import com.vvboot.end.core.exception.InnerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +40,7 @@ public class AreaController {
             List<ProvinceDto> provinceDtos = areaService.findAllProvinces();
             Success ok = new Success(provinceDtos, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
@@ -56,7 +56,7 @@ public class AreaController {
             List<CityDto> cityDtos = areaService.findAllCities(provinceCode);
             Success ok = new Success(cityDtos, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
@@ -72,7 +72,7 @@ public class AreaController {
             List<DistrictDto> districtDtos = areaService.findAllDistricts(cityCode);
             Success ok = new Success(districtDtos, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
@@ -88,7 +88,7 @@ public class AreaController {
             List<TownDto> townDtos = areaService.findAllTowns(districtCode);
             Success ok = new Success(townDtos, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
@@ -104,7 +104,7 @@ public class AreaController {
             List<VillageDto> villageDtos = areaService.findAllVillages(townCode);
             Success ok = new Success(villageDtos, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         } catch (InnerException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);

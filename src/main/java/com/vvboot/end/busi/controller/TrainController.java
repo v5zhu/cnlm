@@ -5,7 +5,7 @@ import com.vvboot.end.busi.params.PageParam;
 import com.vvboot.end.busi.service.TrainService;
 import com.vvboot.end.core.commons.Pageable;
 import com.vvboot.end.core.commons.Success;
-import com.vvboot.end.core.exception.CoreException;
+import com.vvboot.end.core.exception.LeeBaoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class TrainController {
             trainService.addTrain(train);
             Success ok = new Success("添加成功", "恭喜你!添加成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -53,7 +53,7 @@ public class TrainController {
             Pageable pageable = trainService.trainList(pageParam);
             Success ok = new Success(pageable, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (CoreException e) {
+        } catch (LeeBaoException e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
