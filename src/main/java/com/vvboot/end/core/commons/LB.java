@@ -1,9 +1,6 @@
-package com.pax.cms.busi.platform;
+package com.vvboot.end.core.commons;
 
 import com.alibaba.fastjson.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author :   zhuxl@paxsz.com
@@ -37,12 +34,5 @@ public class LB extends JSONObject{
         lb.put("code",500);
         lb.put("msg",msg);
         return lb;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(LB.ok().toString());
-        System.out.println(LB.ok(LB.ok()).toString());
-        System.out.println(LB.error().toString());
-        System.out.println(LB.error("系统异常").toString());
     }
 }

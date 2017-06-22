@@ -56,6 +56,12 @@
                     #{name}
                 </foreach>
             </if>
+            <if test="filters.containsKey('orgId') and filters.orgId.size!=0">
+                s.org_id in
+                <foreach collection="filters.orgId" item="orgId" open="(" separator="," close=")">
+                    #{orgId}
+                </foreach>
+            </if>
         </where>
         <choose>
             <when test="sorts.size!=0">

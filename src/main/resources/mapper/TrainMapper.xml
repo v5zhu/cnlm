@@ -77,22 +77,28 @@
                     #{month}
                 </foreach>
             </if>
+            <if test="filters.containsKey('week') and filters.week.size!=0">
+                t.week in
+                <foreach collection="filters.week" item="week" open="(" separator="," close=")">
+                    #{week}
+                </foreach>
+            </if>
             <if test="filters.containsKey('type') and filters.type.size!=0">
                 and t.type in
                 <foreach collection="filters.type" item="type" open="(" separator="," close=")">
                     #{type}
                 </foreach>
             </if>
-            <if test="filters.containsKey('organization') and filters.organization.size!=0">
+            <if test="filters.containsKey('organizationId') and filters.organizationId.size!=0">
                 and t.org_id in
-                <foreach collection="filters.organization" item="organization" open="(" separator="," close=")">
-                    #{organization}
+                <foreach collection="filters.organizationId" item="organizationId" open="(" separator="," close=")">
+                    #{organizationId}
                 </foreach>
             </if>
-            <if test="filters.containsKey('student') and filters.student.size!=0">
+            <if test="filters.containsKey('studentId') and filters.studentId.size!=0">
                 and t.student_id in
-                <foreach collection="filters.student" item="student" open="(" separator="," close=")">
-                    #{student}
+                <foreach collection="filters.studentId" item="studentId" open="(" separator="," close=")">
+                    #{studentId}
                 </foreach>
             </if>
         </where>
