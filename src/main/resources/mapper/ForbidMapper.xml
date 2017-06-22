@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="com.vvboot.end.busi.dao.ForbidMybatisDao">
-    <insert id="addForbid" parameterType="com.vvboot.end.busi.entity.Forbid" useGeneratedKeys="true" keyProperty="id">
+<mapper namespace="net.leebao.open.busi.dao.ForbidMybatisDao">
+    <insert id="addForbid" parameterType="net.leebao.open.busi.entity.Forbid" useGeneratedKeys="true" keyProperty="id">
         insert into t_b_forbid(
         name,type,star,feature,harm,harm_detail,defense,create_time,create_user,update_time,update_user
         )
@@ -12,7 +12,7 @@
         #{name},#{type},#{star},#{feature},#{harm},#{harmDetail},#{defense},#{createTime},#{createUser},#{updateTime},#{updateUser}
         )
     </insert>
-    <update id="update" parameterType="com.vvboot.end.busi.entity.Forbid">
+    <update id="update" parameterType="net.leebao.open.busi.entity.Forbid">
         update t_b_forbid
         <set>
             name=#{name},
@@ -27,7 +27,7 @@
         </set>
         where id=#{id}
     </update>
-    <select id="detail" resultType="com.vvboot.end.busi.entity.Forbid" parameterType="long">
+    <select id="detail" resultType="net.leebao.open.busi.entity.Forbid" parameterType="long">
         select
             f.*,
             bt.text typeName,
@@ -38,8 +38,8 @@
         where f.id=#{0}
     </select>
 
-    <select id="pageList" resultType="com.vvboot.end.busi.entity.Forbid"
-            parameterType="com.vvboot.end.busi.params.PageParam">
+    <select id="pageList" resultType="net.leebao.open.busi.entity.Forbid"
+            parameterType="net.leebao.open.busi.params.PageParam">
         select
         f.*,
         bt.text typeName,

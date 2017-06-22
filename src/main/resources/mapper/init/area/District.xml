@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="com.vvboot.end.busi.dao.init.area.DistrictMybatisDao">
-    <select id="findDistrictsByCityCode" resultType="com.vvboot.end.busi.entity.init.area.District" parameterType="string">
+<mapper namespace="net.leebao.open.busi.dao.init.area.DistrictMybatisDao">
+    <select id="findDistrictsByCityCode" resultType="net.leebao.open.busi.entity.init.area.District" parameterType="string">
         select d.code,d.name,d.city_code
         from t_bi_district d
         where d.city_code=#{0}

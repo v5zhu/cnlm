@@ -11,10 +11,10 @@
         <version>1.5.1.RELEASE</version>
     </parent>
     <groupId>springboot-test</groupId>
-    <artifactId>vvboot</artifactId>
+    <artifactId>leebao</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <name>vvboot</name>
+    <name>leebao</name>
 
     <properties>
         <mybatis-spring-boot>1.2.0</mybatis-spring-boot>
@@ -136,7 +136,7 @@
     </dependencies>
 
     <build>
-        <finalName>vv</finalName>
+        <finalName>leebao</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

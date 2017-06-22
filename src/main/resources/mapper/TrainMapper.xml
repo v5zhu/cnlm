@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="com.vvboot.end.busi.dao.TrainDao">
-    <insert id="addTrain" parameterType="com.vvboot.end.busi.entity.Train" useGeneratedKeys="true" keyProperty="id">
+<mapper namespace="net.leebao.open.busi.dao.TrainDao">
+    <insert id="addTrain" parameterType="net.leebao.open.busi.entity.Train" useGeneratedKeys="true" keyProperty="id">
         insert into t_b_train(
         month,day,week,clock,type,org_id,student_id,start_time,end_time,hours,salary,teacher,create_time,update_time,remark
         )
@@ -13,7 +13,7 @@
         )
     </insert>
 
-    <resultMap id="trainMap" type="com.vvboot.end.busi.entity.Train">
+    <resultMap id="trainMap" type="net.leebao.open.busi.entity.Train">
         <id column="id" property="id"/>
         <result column="month" property="month"/>
         <result column="day" property="day"/>
@@ -48,7 +48,7 @@
         <result column="stu_remark" property="student.remark"/>
     </resultMap>
     <select id="pageList" resultMap="trainMap"
-            parameterType="com.vvboot.end.busi.params.PageParam">
+            parameterType="net.leebao.open.busi.params.PageParam">
         select
         t.*,
         so.id org_id,

@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="com.vvboot.end.busi.dao.SchoolOrganizationDao">
-    <insert id="addOrganization" parameterType="com.vvboot.end.busi.entity.SchoolOrganization" useGeneratedKeys="true" keyProperty="id">
+<mapper namespace="net.leebao.open.busi.dao.SchoolOrganizationDao">
+    <insert id="addOrganization" parameterType="net.leebao.open.busi.entity.SchoolOrganization" useGeneratedKeys="true" keyProperty="id">
         insert into t_b_school_organization(
         name,boss,address,create_time,update_time,remark
         )
@@ -13,13 +13,13 @@
         )
     </insert>
 
-    <select id="dropdown" resultType="com.vvboot.end.busi.entity.SchoolOrganization">
+    <select id="dropdown" resultType="net.leebao.open.busi.entity.SchoolOrganization">
         select so.id,so.name,so.boss
         from t_b_school_organization so order by so.create_time desc
     </select>
 
-    <select id="pageList" resultType="com.vvboot.end.busi.entity.SchoolOrganization"
-            parameterType="com.vvboot.end.busi.params.PageParam">
+    <select id="pageList" resultType="net.leebao.open.busi.entity.SchoolOrganization"
+            parameterType="net.leebao.open.busi.params.PageParam">
         select
         so.*
         from t_b_school_organization so
