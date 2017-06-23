@@ -1,16 +1,10 @@
 package net.leebao.open.busi.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
-import com.leebao.open.busi.dao.init.area.*;
-import com.leebao.open.busi.dto.init.area.*;
-import com.leebao.open.busi.entity.init.area.*;
 import net.leebao.open.busi.dao.init.area.*;
 import net.leebao.open.busi.dto.init.area.*;
 import net.leebao.open.busi.entity.init.area.*;
 import net.leebao.open.busi.service.AreaService;
-import com.vvboot.end.busi.dao.init.area.*;
-import com.vvboot.end.busi.dto.init.area.*;
-import com.vvboot.end.busi.entity.init.area.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

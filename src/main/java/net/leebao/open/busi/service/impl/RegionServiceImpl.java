@@ -1,9 +1,5 @@
 package net.leebao.open.busi.service.impl;
 
-import com.leebao.open.busi.dao.init.area.*;
-import com.leebao.open.busi.dto.init.area.*;
-import com.vvboot.end.busi.dao.init.area.*;
-import com.vvboot.end.busi.dto.init.area.*;
 import net.leebao.open.busi.dao.init.area.*;
 import net.leebao.open.busi.dto.init.area.*;
 import net.leebao.open.busi.service.RegionService;
