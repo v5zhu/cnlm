@@ -13,7 +13,7 @@ import java.util.List;
 public interface StudentDao {
     void addStudent(Student student);
 
-    List<Student> dropdown();
+    List<Student> dropdown(Long orgId);
 
     List<Student> pageList(PageParam pageParam);
 }

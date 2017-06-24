@@ -13,9 +13,11 @@
         )
     </insert>
 
-    <select id="dropdown" resultType="net.leebao.open.busi.entity.Student">
+    <select id="dropdown" resultType="net.leebao.open.busi.entity.Student" parameterType="long">
         select s.id,s.name
-        from t_b_student s order by s.create_time desc
+        from t_b_student s
+        where s.org_id=#{0}
+        order by s.create_time desc
     </select>
     <resultMap id="studentMap" type="net.leebao.open.busi.entity.Student">
         <id column="id" property="id"/>

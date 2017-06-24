@@ -14,10 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by zhuxl@paxsz.com on 2016/7/27.
@@ -48,9 +45,9 @@ public class StudentController {
     @RequestMapping(value = "dropdown", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity dropdown() {
+    public ResponseEntity dropdown(@RequestParam("orgId")Long orgId) {
         try {
-            JSONArray array = studentService.dropdown();
+            JSONArray array = studentService.dropdown(orgId);
             Success ok = new Success(array, "查询成功");
             return new ResponseEntity(ok, HttpStatus.OK);
         } catch (LeeBaoException e) {

@@ -13,7 +13,7 @@ import net.leebao.open.core.commons.Pageable;
 public interface StudentService {
     void addStudent(Student student);
 
-    JSONArray dropdown();
+    JSONArray dropdown(Long orgId);
 
     Pageable studentList(PageParam pageParam);
 }

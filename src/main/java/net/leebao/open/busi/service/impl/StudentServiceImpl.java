@@ -36,8 +36,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public JSONArray dropdown() {
-        List<Student> list = studentDao.dropdown();
+    public JSONArray dropdown(Long orgId) {
+        List<Student> list = studentDao.dropdown(orgId);
         JSONArray array = JSONArray.parseArray(JSONArray.toJSONString(list));
         return array;
     }

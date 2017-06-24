@@ -25,7 +25,7 @@ import javax.sql.DataSource;
 
 public class MasterDataSourceConfig {
 
-    static final String PACKAGE = "com.vvboot.end.busi.dao";
+    static final String PACKAGE = "net.leebao.open.busi.dao";
 
     @Value("${mybatis.mapperLocations}")
     private String mapperLocation;
