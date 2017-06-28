@@ -2,20 +2,20 @@ package net.leebao.open.busi.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import net.leebao.open.busi.service.ArticleService;
-import net.leebao.open.core.exception.LeeBaoException;
-import net.leebao.open.busi.dao.UserMybatisDao;
+import net.leebao.auth.dao.UserDao;
+import net.leebao.auth.entity.User;
 import net.leebao.open.busi.dao.article.ArticleMybatisDao;
 import net.leebao.open.busi.dao.init.article.ArticleCategoryMybatisDao;
 import net.leebao.open.busi.dao.init.article.ArticleTagMybatisDao;
 import net.leebao.open.busi.dao.init.article.ArticleTypeMybatisDao;
 import net.leebao.open.busi.dto.article.ArticleDto;
-import net.leebao.open.busi.entity.User;
 import net.leebao.open.busi.entity.article.Article;
 import net.leebao.open.busi.entity.init.article.ArticleCategory;
 import net.leebao.open.busi.entity.init.article.ArticleTag;
 import net.leebao.open.busi.entity.init.article.ArticleType;
+import net.leebao.open.busi.service.ArticleService;
 import net.leebao.open.core.commons.Pageable;
+import net.leebao.open.core.exception.LeeBaoException;
 import net.leebao.open.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ import java.util.*;
 public class ArticleServiceImpl implements ArticleService {
     private static final Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
     @Autowired
-    private UserMybatisDao userMybatisDao;
+    private UserDao userDao;
     @Autowired
     private ArticleTagMybatisDao articleTagMybatisDao;
     @Autowired
@@ -48,7 +48,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional
     public ArticleDto writeArticle(ArticleDto articleDto) {
         //校验dto属性
-        User author = userMybatisDao.findByUserId(articleDto.getUserId());
+        User author = userDao.findByUserId(articleDto.getUserId());
         if (author == null) {
             throw new LeeBaoException("非法操作");
         }

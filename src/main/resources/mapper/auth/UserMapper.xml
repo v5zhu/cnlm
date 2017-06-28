@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="net.leebao.open.busi.dao.UserMybatisDao">
+<mapper namespace="net.leebao.auth.dao.UserDao">
     <insert id="register" parameterType="net.leebao.auth.entity.User" useGeneratedKeys="true" keyProperty="id">
         insert into t_si_user(
         token,phone

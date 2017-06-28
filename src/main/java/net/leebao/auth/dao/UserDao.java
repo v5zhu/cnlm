@@ -1,4 +1,4 @@
-package net.leebao.open.busi.dao;
+package net.leebao.auth.dao;
 
 
 import net.leebao.auth.entity.User;
@@ -12,7 +12,7 @@ import java.util.Map;
  */
 
 @Mapper
-public interface UserMybatisDao {
+public interface UserDao {
     int register(User user);
 
     int updateUser(User user);

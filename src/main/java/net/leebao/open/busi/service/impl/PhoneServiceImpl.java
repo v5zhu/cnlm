@@ -1,7 +1,7 @@
 package net.leebao.open.busi.service.impl;
 
 import net.leebao.open.busi.dao.PhoneCodeMybatisDao;
-import net.leebao.open.busi.dao.UserMybatisDao;
+import net.leebao.auth.dao.UserDao;
 import net.leebao.open.busi.entity.PhoneCode;
 import net.leebao.open.busi.enums.PhoneVerifyResult;
 import net.leebao.open.busi.service.PhoneService;
@@ -38,13 +38,13 @@ public class PhoneServiceImpl implements PhoneService {
     private static final Logger logger = LoggerFactory.getLogger(PhoneServiceImpl.class);
 
     @Autowired
-    UserMybatisDao userMybatisDao;
+    UserDao userDao;
     @Autowired
     PhoneCodeMybatisDao phoneCodeMybatisDao;
 
     @Override
     public void checkPhone(String phone) throws LeeBaoException {
-        String mbl = userMybatisDao.checkPhone(phone);
+        String mbl = userDao.checkPhone(phone);
         if (org.apache.commons.lang.StringUtils.isNotBlank(mbl)) {
             throw new LeeBaoException("手机号已注册");
         }

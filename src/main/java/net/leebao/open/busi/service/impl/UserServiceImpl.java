@@ -1,5 +1,6 @@
 package net.leebao.open.busi.service.impl;
 
+import net.leebao.auth.dao.UserDao;
 import net.leebao.auth.entity.User;
 import net.leebao.open.busi.dao.*;
 import net.leebao.open.busi.dto.UserDto;
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
-    UserMybatisDao userMybatisDao;
+    UserDao userDao;
     @Autowired
     CertificateMybatisDao certificateMybatisDao;
     @Autowired
@@ -60,7 +61,7 @@ public class UserServiceImpl implements UserService {
             throw new LeeBaoException("两次密码不一致");
         }
         //判定手机号是否已注册
-        int count1 = userMybatisDao.checkIsRegisteredByPhone(registerParam.getPhone());
+        int count1 = userDao.checkIsRegisteredByPhone(registerParam.getPhone());
         if (count1 > 0) {
             throw new LeeBaoException("手机号已注册");
         }
@@ -81,7 +82,7 @@ public class UserServiceImpl implements UserService {
         user.setPhone(registerParam.getPhone());
         //insert user
         try {
-            userMybatisDao.register(user);
+            userDao.register(user);
         } catch (Exception e) {
             logger.info("插入用户信息异常，堆栈:", e);
             throw new InnerException("插入数据异常");
@@ -118,7 +119,7 @@ public class UserServiceImpl implements UserService {
             logger.info("登录账号[{}]密码[{}]错误", loginName, password);
             throw new LeeBaoException("密码错误");
         }
-        User user = userMybatisDao.findByToken(authCenter.getUserId());
+        User user = userDao.findByToken(authCenter.getUserId());
         return BeanMapper.map(user, UserDto.class);
     }
 
@@ -141,7 +142,7 @@ public class UserServiceImpl implements UserService {
                 params.put("value", "'" + perfectInfoParam.getValue() + "'");
             }
             logger.info("即将完善的信息参数:[{}]", params.toString());
-            userMybatisDao.perfectUserInfo(params);
+            userDao.perfectUserInfo(params);
         } catch (Exception e) {
             logger.info("完善信息异常，堆栈:", e);
             throw new InnerException("更新记录异常");
@@ -150,7 +151,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserInfo(String uid) throws LeeBaoException {
-        User user = userMybatisDao.findByToken(uid);
+        User user = userDao.findByToken(uid);
         if (user == null) {
             throw new LeeBaoException("非法操作");
         }

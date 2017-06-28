@@ -1,4 +1,4 @@
-package net.leebao.open.busi.datasource;
+package net.leebao.auth.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -21,11 +21,12 @@ import javax.sql.DataSource;
  */
 @Configuration
 // 扫描 Mapper 接口并容器管理
-@MapperScan(basePackages = MasterDataSourceConfig.PACKAGE, sqlSessionFactoryRef = "masterSqlSessionFactory")
+@MapperScan(basePackages = {MasterDataSourceConfig.PACKAGE_AUTH,MasterDataSourceConfig.PACKAGE_OPEN}, sqlSessionFactoryRef = "masterSqlSessionFactory")
 
 public class MasterDataSourceConfig {
 
-    static final String PACKAGE = "net.leebao.open.busi.dao";
+    static final String PACKAGE_AUTH = "net.leebao.auth.dao";
+    static final String PACKAGE_OPEN = "net.leebao.open.busi.dao";
 
     @Value("${mybatis.mapperLocations}")
     private String mapperLocation;
