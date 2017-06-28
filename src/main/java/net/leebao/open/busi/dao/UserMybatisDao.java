@@ -1,7 +1,7 @@
 package net.leebao.open.busi.dao;
 
 
-import net.leebao.open.busi.entity.User;
+import net.leebao.auth.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

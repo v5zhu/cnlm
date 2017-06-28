@@ -1,10 +1,10 @@
 package net.leebao.open.busi.service.impl;
 
+import net.leebao.auth.entity.User;
 import net.leebao.open.busi.dao.*;
 import net.leebao.open.busi.dto.UserDto;
 import net.leebao.open.busi.entity.AuthCenter;
 import net.leebao.open.busi.entity.PhoneCode;
-import net.leebao.open.busi.entity.User;
 import net.leebao.open.busi.enums.UserInfo;
 import net.leebao.open.busi.params.LoginParam;
 import net.leebao.open.busi.params.PerfectInfoParam;

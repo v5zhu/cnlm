@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class User {
     private Long id;
+    private Organization organization;
     private String token;
     private String loginName;
     private String password;
@@ -299,5 +300,13 @@ public class User {
 
     public void setReserve5(String reserve5) {
         this.reserve5 = reserve5;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 }
