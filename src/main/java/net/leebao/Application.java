@@ -1,4 +1,4 @@
-package net.leebao.open;
+package net.leebao;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
