@@ -3,12 +3,14 @@ package net.leebao.auth.entity;
 import java.util.Date;
 
 /**
- * Created by LONG on 2017/6/27.
+ * Created by LONG on 2017/6/28.
  */
-public class Permission {
+public class Organization {
     private Long id;
+    private String orgId;
     private String name;
-    private String symbol;
+    private Long pid;
+    private Integer sort;
     private String creator;
     private Date createTime;
     private String modifier;
@@ -25,6 +27,14 @@ public class Permission {
         this.id = id;
     }
 
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
     public String getName() {
         return name;
     }
@@ -33,12 +43,20 @@ public class Permission {
         this.name = name;
     }
 
-    public String getSymbol() {
-        return symbol;
+    public Long getPid() {
+        return pid;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public void setPid(Long pid) {
+        this.pid = pid;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public String getCreator() {

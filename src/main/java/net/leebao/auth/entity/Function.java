@@ -3,12 +3,14 @@ package net.leebao.auth.entity;
 import java.util.Date;
 
 /**
- * Created by LONG on 2017/6/27.
+ * Created by LONG on 2017/6/28.
  */
-public class Permission {
+public class Function {
     private Long id;
     private String name;
-    private String symbol;
+    private String url;
+    private String icon;
+    private Menu menu;
     private String creator;
     private Date createTime;
     private String modifier;
@@ -33,12 +35,28 @@ public class Permission {
         this.name = name;
     }
 
-    public String getSymbol() {
-        return symbol;
+    public String getUrl() {
+        return url;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 
     public String getCreator() {
