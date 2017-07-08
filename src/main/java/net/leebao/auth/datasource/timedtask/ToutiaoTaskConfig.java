@@ -1,5 +1,6 @@
 package net.leebao.auth.datasource.timedtask;
 
+import net.leebao.core.constant.LBTimedTaskConstant;
 import net.leebao.open.inner.timertask.InvokingJobDetailDetailFactory;
 import org.quartz.JobDetail;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,54 +23,54 @@ public class ToutiaoTaskConfig {
     private String cronToutiaoUpdate;
 
     /**
-     * 加载job
+     * 更新头条
+     *
      * @return
      */
     @Bean
-    public JobDetailFactoryBean toutiaoJob() {
-        return createJobDetail(InvokingJobDetailDetailFactory.class, "updateDialogStatusGroup", "toutiaoTimerTask");
-    }
-
-    /**
-     * 加载触发器
-     * @param jobDetail
-     * @return
-     */
-    @Bean(name = "toutiaoJobTrigger")
-    public CronTriggerFactoryBean toutiaoJobTrigger(@Qualifier("toutiaoJob") JobDetail jobDetail) {
-        return dialogStatusTrigger(jobDetail, cronToutiaoUpdate);
-    }
-
-    /**
-     * 创建job工厂
-     * @param jobClass
-     * @param groupName
-     * @param targetObject
-     * @return
-     */
-    private static JobDetailFactoryBean createJobDetail(Class<?> jobClass, String groupName, String targetObject) {
+    public JobDetailFactoryBean toutiaoUpdateJobDetail() {
         JobDetailFactoryBean factoryBean = new JobDetailFactoryBean();
-        factoryBean.setJobClass(jobClass);
+        factoryBean.setJobClass(InvokingJobDetailDetailFactory.class);
         factoryBean.setDurability(true);
         factoryBean.setRequestsRecovery(true);
-        factoryBean.setGroup(groupName);
+        factoryBean.setGroup(LBTimedTaskConstant.CommonConstant.GROUP);
         Map<String, String> map = new HashMap<>();
-        map.put("targetObject", targetObject);
-        map.put("targetMethod", "updateToutiao");
+        map.put("targetObject", LBTimedTaskConstant.ToutiaoConstant.targetObject);
+        map.put("targetMethod", LBTimedTaskConstant.ToutiaoConstant.targetMethod_updateToutiao);
         factoryBean.setJobDataAsMap(map);
+        return factoryBean;
+    }
+    @Bean
+    public CronTriggerFactoryBean toutiaoUpdateTrigger(@Qualifier("toutiaoUpdateJobDetail") JobDetail jobDetail) {
+        CronTriggerFactoryBean factoryBean = new CronTriggerFactoryBean();
+        factoryBean.setJobDetail(jobDetail);
+        factoryBean.setCronExpression(cronToutiaoUpdate);
         return factoryBean;
     }
 
     /**
-     * 创建触发器工厂
-     * @param jobDetail
-     * @param cronExpression
+     * 删除头条
+     *
      * @return
      */
-    private static CronTriggerFactoryBean dialogStatusTrigger(JobDetail jobDetail, String cronExpression) {
+    @Bean
+    public JobDetailFactoryBean toutiaoDeleteJobDetail() {
+        JobDetailFactoryBean factoryBean = new JobDetailFactoryBean();
+        factoryBean.setJobClass(InvokingJobDetailDetailFactory.class);
+        factoryBean.setDurability(true);
+        factoryBean.setRequestsRecovery(true);
+        factoryBean.setGroup(LBTimedTaskConstant.CommonConstant.GROUP);
+        Map<String, String> map = new HashMap<>();
+        map.put("targetObject", LBTimedTaskConstant.ToutiaoConstant.targetObject);
+        map.put("targetMethod", LBTimedTaskConstant.ToutiaoConstant.targetMethod_deleteToutiao);
+        factoryBean.setJobDataAsMap(map);
+        return factoryBean;
+    }
+    @Bean
+    public CronTriggerFactoryBean toutiaoDeleteTrigger(@Qualifier("toutiaoDeleteJobDetail") JobDetail jobDetail) {
         CronTriggerFactoryBean factoryBean = new CronTriggerFactoryBean();
         factoryBean.setJobDetail(jobDetail);
-        factoryBean.setCronExpression (cronExpression);
+        factoryBean.setCronExpression(cronToutiaoUpdate);
         return factoryBean;
     }
 }

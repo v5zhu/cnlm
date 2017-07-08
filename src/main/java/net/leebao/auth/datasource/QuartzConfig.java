@@ -76,21 +76,18 @@ public class QuartzConfig {
     }
 
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean(@Qualifier("toutiaoJobTrigger") Trigger cronJobTrigger) throws IOException {
+    public SchedulerFactoryBean schedulerFactoryBean(@Qualifier("toutiaoUpdateTrigger") Trigger updateTrigger,
+                                                     @Qualifier("toutiaoDeleteTrigger") Trigger deleteTrigger) throws IOException {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
-        // this allows to update triggers in DB when updating settings in config file:
-        //用于quartz集群,QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了
         factory.setOverwriteExistingJobs(true);
         //用于quartz集群,加载quartz数据源
         //factory.setDataSource(dataSource);
-        //QuartzScheduler 延时启动，应用启动完10秒后 QuartzScheduler 再启动
         factory.setStartupDelay(10);
-        //用于quartz集群,加载quartz数据源配置
         factory.setQuartzProperties(quartzProperties());
         factory.setAutoStartup(true);
         factory.setApplicationContextSchedulerContextKey("applicationContext");
         //注册触发器
-        factory.setTriggers(cronJobTrigger);//直接使用配置文件
+        factory.setTriggers(updateTrigger,deleteTrigger);//直接使用配置文件
         return factory;
     }
 }
