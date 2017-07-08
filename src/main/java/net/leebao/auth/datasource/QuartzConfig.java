@@ -32,7 +32,7 @@ public class QuartzConfig {
     private String myDSMaxConnections;
 
 
-    /**
+    /**定时任务集群配置
      * 设置属性
      * @return
      * @throws IOException
