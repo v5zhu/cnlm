@@ -21,6 +21,8 @@ public class ToutiaoTaskConfig {
 
     @Value("${quartz.cron.toutiao.update}")
     private String cronToutiaoUpdate;
+    @Value("${quartz.cron.toutiao.delete}")
+    private String cronToutiaoDelete;
 
     /**
      * 更新头条
@@ -70,7 +72,7 @@ public class ToutiaoTaskConfig {
     public CronTriggerFactoryBean toutiaoDeleteTrigger(@Qualifier("toutiaoDeleteJobDetail") JobDetail jobDetail) {
         CronTriggerFactoryBean factoryBean = new CronTriggerFactoryBean();
         factoryBean.setJobDetail(jobDetail);
-        factoryBean.setCronExpression(cronToutiaoUpdate);
+        factoryBean.setCronExpression(cronToutiaoDelete);
         return factoryBean;
     }
 }
