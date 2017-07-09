@@ -7,14 +7,17 @@ import java.util.Date;
  */
 public class Menu {
     private Long id;
+    private Site site;
     private String name;
     private String url;
     private String icon;
     private Integer sort;
     private Long pid;
-    private String creator;
+    private Long createUserid;
+    private String createUsername;
     private Date createTime;
-    private String modifier;
+    private Long modifyUserid;
+    private String modifyUsername;
     private Date modifyTime;
     private String reserve1;
     private String reserve2;
@@ -68,28 +71,12 @@ public class Menu {
         this.pid = pid;
     }
 
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    public String getModifier() {
-        return modifier;
-    }
-
-    public void setModifier(String modifier) {
-        this.modifier = modifier;
     }
 
     public Date getModifyTime() {
@@ -122,5 +109,45 @@ public class Menu {
 
     public void setReserve3(String reserve3) {
         this.reserve3 = reserve3;
+    }
+
+    public Site getSite() {
+        return site;
+    }
+
+    public void setSite(Site site) {
+        this.site = site;
+    }
+
+    public Long getCreateUserid() {
+        return createUserid;
+    }
+
+    public void setCreateUserid(Long createUserid) {
+        this.createUserid = createUserid;
+    }
+
+    public String getCreateUsername() {
+        return createUsername;
+    }
+
+    public void setCreateUsername(String createUsername) {
+        this.createUsername = createUsername;
+    }
+
+    public Long getModifyUserid() {
+        return modifyUserid;
+    }
+
+    public void setModifyUserid(Long modifyUserid) {
+        this.modifyUserid = modifyUserid;
+    }
+
+    public String getModifyUsername() {
+        return modifyUsername;
+    }
+
+    public void setModifyUsername(String modifyUsername) {
+        this.modifyUsername = modifyUsername;
     }
 }

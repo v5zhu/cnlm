@@ -9,12 +9,15 @@ import java.util.Date;
  */
 public class Role {
     private Long id;
+    private Site site;
     private RoleType type=RoleType.NORMAL;
     private String name;
     private Organization organization;
-    private String creator;
+    private Long createUserid;
+    private String createUsername;
     private Date createTime;
-    private String modifier;
+    private Long modifiyUserid;
+    private String modifiyUsername;
     private Date modifyTime;
     private String reserve1;
     private String reserve2;
@@ -52,28 +55,12 @@ public class Role {
         this.organization = organization;
     }
 
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    public String getModifier() {
-        return modifier;
-    }
-
-    public void setModifier(String modifier) {
-        this.modifier = modifier;
     }
 
     public Date getModifyTime() {
@@ -106,5 +93,37 @@ public class Role {
 
     public void setReserve3(String reserve3) {
         this.reserve3 = reserve3;
+    }
+
+    public Long getCreateUserid() {
+        return createUserid;
+    }
+
+    public void setCreateUserid(Long createUserid) {
+        this.createUserid = createUserid;
+    }
+
+    public String getCreateUsername() {
+        return createUsername;
+    }
+
+    public void setCreateUsername(String createUsername) {
+        this.createUsername = createUsername;
+    }
+
+    public Long getModifiyUserid() {
+        return modifiyUserid;
+    }
+
+    public void setModifiyUserid(Long modifiyUserid) {
+        this.modifiyUserid = modifiyUserid;
+    }
+
+    public String getModifiyUsername() {
+        return modifiyUsername;
+    }
+
+    public void setModifiyUsername(String modifiyUsername) {
+        this.modifiyUsername = modifiyUsername;
     }
 }

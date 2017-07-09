@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class User {
     private Long id;
+    private Site site;
     private Organization organization;
     private String token;
     private String loginName;
@@ -28,9 +29,11 @@ public class User {
     private Date loginTime;
     private Date lastLoginTime;
     private Long loginCount;
-    private String creator;
+    private Long createUserid;
+    private String createUsername;
     private Date createTime;
-    private String modifier;
+    private Long modifyUserid;
+    private String modifyUsername;
     private Date modifyTime;
     private String reserve1;
     private String reserve2;
@@ -230,28 +233,12 @@ public class User {
         this.loginCount = loginCount;
     }
 
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    public String getModifier() {
-        return modifier;
-    }
-
-    public void setModifier(String modifier) {
-        this.modifier = modifier;
     }
 
     public Date getModifyTime() {
@@ -308,5 +295,29 @@ public class User {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    public Site getSite() {
+        return site;
+    }
+
+    public void setSite(Site site) {
+        this.site = site;
+    }
+
+    public Long getModifyUserid() {
+        return modifyUserid;
+    }
+
+    public void setModifyUserid(Long modifyUserid) {
+        this.modifyUserid = modifyUserid;
+    }
+
+    public String getModifyUsername() {
+        return modifyUsername;
+    }
+
+    public void setModifyUsername(String modifyUsername) {
+        this.modifyUsername = modifyUsername;
     }
 }
