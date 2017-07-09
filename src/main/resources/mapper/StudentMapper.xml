@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="net.leebao.open.busi.dao.StudentDao">
-    <insert id="addStudent" parameterType="net.leebao.open.busi.entity.Student" useGeneratedKeys="true" keyProperty="id">
+<mapper namespace="net.leebao.busi.dao.StudentDao">
+    <insert id="addStudent" parameterType="net.leebao.busi.entity.Student" useGeneratedKeys="true" keyProperty="id">
         insert into t_b_student(
         org_id,name,age,grade,phone,address,create_time,update_time,remark
         )
@@ -13,13 +13,13 @@
         )
     </insert>
 
-    <select id="dropdown" resultType="net.leebao.open.busi.entity.Student" parameterType="long">
+    <select id="dropdown" resultType="net.leebao.busi.entity.Student" parameterType="long">
         select s.id,s.name
         from t_b_student s
         where s.org_id=#{0}
         order by s.create_time desc
     </select>
-    <resultMap id="studentMap" type="net.leebao.open.busi.entity.Student">
+    <resultMap id="studentMap" type="net.leebao.busi.entity.Student">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="age" property="age"/>
@@ -39,7 +39,7 @@
         <result column="org_remark" property="organization.remark"/>
     </resultMap>
     <select id="pageList" resultMap="studentMap"
-            parameterType="net.leebao.open.busi.params.PageParam">
+            parameterType="net.leebao.busi.params.PageParam">
         select
         s.*,
         so.id org_id,

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="net.leebao.open.busi.dao.ToutiaoMybatisDao">
+<mapper namespace="net.leebao.busi.dao.ToutiaoMybatisDao">
     <insert id="insertToutiaoInBatch" parameterType="list">
         insert ignore into t_b_toutiao(
         uniquekey,title,date,category,author_name,
@@ -21,7 +21,7 @@
             )
         </foreach>
     </insert>
-    <select id="overview" resultType="net.leebao.open.busi.entity.Toutiao" parameterType="hashMap">
+    <select id="overview" resultType="net.leebao.busi.entity.Toutiao" parameterType="hashMap">
         SELECT
             tt.uniquekey,
             tt.title,
@@ -40,7 +40,7 @@
             tt.date DESC
         LIMIT #{limit} OFFSET #{offset}
     </select>
-    <select id="findAll" resultType="net.leebao.open.busi.entity.Toutiao" parameterType="net.leebao.open.busi.params.PageParam">
+    <select id="findAll" resultType="net.leebao.busi.entity.Toutiao" parameterType="net.leebao.busi.params.PageParam">
         select * from t_b_toutiao tt
         <where>
             <if test="filters.containsKey('author')">
@@ -76,7 +76,7 @@
         </set>
         where uniquekey=#{0}
     </update>
-    <select id="findById" resultType="net.leebao.open.busi.entity.Toutiao" parameterType="string">
+    <select id="findById" resultType="net.leebao.busi.entity.Toutiao" parameterType="string">
         select tt.* from t_b_toutiao where tt.uniquekey=#{0}
     </select>
     <select id="findApprovalAmountById" resultType="int" parameterType="string">

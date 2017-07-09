@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="com.vvboot.busi.end.dao.article.ArticleCommentReplyMybatisDao">
-    <insert id="addReply" parameterType="net.leebao.open.busi.entity.article.ArticleCommentReply">
+    <insert id="addReply" parameterType="net.leebao.busi.entity.article.ArticleCommentReply">
         insert into t_b_article_comment_reply(
         id,comment_id,sponsor_id,replier_id,content,
         approval_amount,oppose_amount,create_time,update_time
@@ -14,7 +14,7 @@
         #{approvalAmount},#{opposeAmount},#{createTime},#{updateTime}
         )
     </insert>
-    <select id="replyList" resultType="net.leebao.open.busi.entity.article.ArticleCommentReply" parameterType="string">
+    <select id="replyList" resultType="net.leebao.busi.entity.article.ArticleCommentReply" parameterType="string">
         select re.*
         from t_b_article_comment_reply re
         where re.comment_id=#{0}

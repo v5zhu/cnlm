@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="com.vvboot.busi.end.dao.common.OpposeMybatisDao">
-    <insert id="addOppose" parameterType="net.leebao.open.busi.entity.common.Oppose">
+    <insert id="addOppose" parameterType="net.leebao.busi.entity.common.Oppose">
         insert ignore into t_b_oppose(
         who,object_id,target_object,create_time,update_time
         )

@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="net.leebao.open.busi.dao.StarDao">
-    <select id="dropdown" resultType="net.leebao.open.busi.entity.Star">
+<mapper namespace="net.leebao.busi.dao.StarDao">
+    <select id="dropdown" resultType="net.leebao.busi.entity.Star">
         select * from t_bi_star order by value asc
     </select>
 </mapper>
