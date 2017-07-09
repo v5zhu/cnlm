@@ -6,7 +6,7 @@ import com.github.pagehelper.PageInfo;
 import net.leebao.busi.service.SchoolOrganizationService;
 import net.leebao.busi.dao.SchoolOrganizationDao;
 import net.leebao.busi.entity.SchoolOrganization;
-import net.leebao.busi.params.PageParam;
+import net.leebao.core.commons.PageParam;
 import net.leebao.core.commons.Pageable;
 import net.leebao.utils.DateUtils;
 import org.springframework.stereotype.Service;

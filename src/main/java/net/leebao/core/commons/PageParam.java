@@ -1,7 +1,8 @@
-package net.leebao.busi.params;
+package net.leebao.core.commons;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import net.leebao.busi.params.SortParam;
 
 import java.util.List;
 import java.util.Map;

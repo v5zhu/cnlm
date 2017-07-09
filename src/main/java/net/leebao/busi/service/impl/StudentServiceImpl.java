@@ -5,7 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import net.leebao.busi.dao.StudentDao;
 import net.leebao.busi.entity.Student;
-import net.leebao.busi.params.PageParam;
+import net.leebao.core.commons.PageParam;
 import net.leebao.busi.service.StudentService;
 import net.leebao.core.commons.Pageable;
 import net.leebao.utils.DateUtils;

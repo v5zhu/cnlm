@@ -2,22 +2,47 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pax.cms.auth.dao.UserDao">
+<mapper namespace="net.leebao.auth.dao.UserDao">
+	<insert id="register" parameterType="net.leebao.auth.entity.User" useGeneratedKeys="true" keyProperty="id">
+		insert into t_si_user(
+		token,phone
+		)
+		values(
+		#{token},#{phone}
+		)
+	</insert>
+	<select id="checkPhone" resultType="string" parameterType="string">
+		select phone from t_si_user where phone=#{0}
+	</select>
+	<update id="perfectUserInfo" statementType="STATEMENT" parameterType="hashMap">
+		<![CDATA[
+        update t_si_user
+        set ${column}=${value}
+        where token=${token}
+        ]]>
+	</update>
+	<select id="findByToken" resultType="net.leebao.auth.entity.User" parameterType="string">
+		select * from t_si_user where token=#{0}
+	</select>
+	<select id="findByUserId" resultType="net.leebao.auth.entity.User" parameterType="long">
+		select * from t_si_user where id=#{0}
+	</select>
+	<select id="checkIsRegisteredByPhone" resultType="int" parameterType="string">
+		select count(1) from t_si_user where phone=#{0}
+	</select>
+	<select id="findAllUsers" resultType="net.leebao.auth.entity.User">
+		select * from t_si_user u order by u.create_time desc
+	</select>
 
     <select id="getNextId" resultType="int">
-        select case when count(id)= 0 then 1 else max(id)+1 end from t_si_User
+        select case when count(id)= 0 then 1 else max(id)+1 end from t_si_user
     </select>
     
     <select id="getSiteId" resultType="int" parameterType="string">
         select site_id from t_si_user where id = #{id}
     </select>
-
-    <insert id="save" parameterType="map">
-        insert INTO t_si_User(id,site_id,name,loginname,salt,password,email,phoneno,status,org_id,buildoper,builddatetime,notes)
-        values(#{id},#{site_id},#{name},#{loginname},#{salt},#{password},#{email},#{phoneno},#{status},#{org_id},#{buildoper},#{builddatetime},#{notes})
-    </insert>
     
-    <resultMap type="User" id="userResult">
+    <resultMap type="net.leebao.auth.entity.User" id="userMap">
     	
     	<id property="id" column="id" />
     	
@@ -25,33 +50,69 @@
     	<result property="site.name" column="site_name" />
     	<result property="site.tag" column="site_tag" />
     	<result property="site.status" column="site_status" />
+
+		<result property="org.id" column="org_id"/>
+		<result property="org.name" column="org_name"/>
+		<result property="org.orgId" column="org_org_id"/>
+
+    	<result property="token" column="token"/>
+    	<result property="loginName" column="login_name"/>
     	<result property="name" column="name"/>
-    	<result property="loginname" column="loginname"/>
+    	<result property="nickname" column="nickname"/>
+    	<result property="gender" column="gender"/>
+    	<result property="birthday" column="birthday"/>
+    	<result property="age" column="age"/>
+    	<result property="country" column="country"/>
+    	<result property="profession" column="profession"/>
+    	<result property="provinceCode" column="province_code"/>
+    	<result property="cityCode" column="city_code"/>
+    	<result property="districtCode" column="district_code"/>
+    	<result property="townCode" column="town_code"/>
+    	<result property="villageCode" column="village_code"/>
+    	<result property="address" column="address"/>
+    	<result property="qq" column="qq"/>
+    	<result property="weixin" column="weixin"/>
+    	<result property="phone" column="phone"/>
     	<result property="email" column="email"/>
-    	<result property="phoneno" column="phoneno"/>
-    	<result property="org.id" column="org_id"/>
-    	<result property="org.name" column="org_name"/>
-    	<result property="org.orgId" column="orgId"/>
+    	<result property="idcard" column="idcard"/>
+    	<result property="loginTime" column="login_time"/>
+    	<result property="lastLoginTime" column="last_login_time"/>
+    	<result property="loginCount" column="login_count"/>
+    	<result property="createUserid" column="create_userid"/>
+    	<result property="createUsername" column="create_username"/>
+    	<result property="createTime" column="create_time"/>
+    	<result property="modifyUserid" column="modify_userid"/>
+    	<result property="modifyUsername" column="modify_username"/>
+    	<result property="modifyTime" column="modify_time"/>
+
+
     </resultMap>
     
-    <select id="list" resultMap="userResult" parameterType="com.pax.cms.core.model.PageQueryParam">
+    <select id="list" resultMap="userMap" parameterType="net.leebao.core.commons.PageParam">
     
-        select t.*,t2.name as site_name,t3.name as org_name   
-        from t_si_User t left outer join t_si_site t2 
-        on t.site_id = t2.id 
-        left outer join t_si_organization t3 
-        on t.org_id = t3.id 
+        select
+			u.*,
+			site.id as site_id,
+			site.name as site_name,
+			site.tag as site_tag,
+			site.status as site_status,
+			org.id as org_id,
+			org.name as org_name,
+			org.orgId as org_org_id
+        from t_si_user u
+		left join t_si_site site on site.id=u.site_id
+        left join t_si_organization org  on org.id = u.org_id
         
         <where>
         	
         	<choose>
-        		<when test="filterMap.containsKey('org_id') and filterMap.org_id !=''.toString()">
-        			t.org_id = #{filterMap.org_id}
+        		<when test="filterMap.containsKey('orgId') and filterMap.orgId !=''">
+        			u.org_id = #{filterMap.orgId}
         		</when>
         		<otherwise>
         			<choose>
 	        			<when test="filterMap.containsKey('orgs')">
-		        			t.org_id in 
+		        			u.org_id in
 					        <foreach collection="filterMap.orgs" item="org" index="index"
 					            open="(" close=")" separator=",">
 					            #{org.id}
@@ -61,9 +122,9 @@
         		</otherwise>
         	</choose>
         	
-			<if test="filterMap.containsKey('name') and filterMap.name !=''.toString()"> and t.name like concat('%',#{filterMap.name},'%')</if>
-			<if test="filterMap.containsKey('site_id') and filterMap.site_id !=''.toString()"> and t.site_id = #{filterMap.site_id}</if>
-			and t.id != 1 
+			<if test="filterMap.containsKey('name') and filterMap.name !=''"> and u.name like concat('%',#{filterMap.name},'%')</if>
+			<if test="filterMap.containsKey('site_id') and filterMap.site_id !=''"> and u.site_id = #{filterMap.siteId}</if>
+			and u.id != 1
 		</where>
 		
 		
@@ -71,12 +132,12 @@
 		<choose>
             <when test="sortMap!=null">
                 <foreach collection="sortMap" index="key"  item="val" open="order by " separator="," close="  ">
-	                #{key} #{val}
+	                ${key} ${val}
 	        	</foreach>
-	        	, builddatetime desc
+	        	, u.create_time desc
             </when>
             <otherwise>
-                  order by builddatetime desc
+                  order by u.create_time desc
              </otherwise>
          </choose>
 		

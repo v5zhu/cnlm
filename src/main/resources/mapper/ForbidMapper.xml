@@ -39,7 +39,7 @@
     </select>
 
     <select id="pageList" resultType="net.leebao.busi.entity.Forbid"
-            parameterType="net.leebao.busi.params.PageParam">
+            parameterType="net.leebao.core.commons.PageParam">
         select
         f.*,
         bt.text typeName,

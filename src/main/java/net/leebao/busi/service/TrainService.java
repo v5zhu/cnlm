@@ -1,7 +1,7 @@
 package net.leebao.busi.service;
 
 import net.leebao.busi.entity.Train;
-import net.leebao.busi.params.PageParam;
+import net.leebao.core.commons.PageParam;
 import net.leebao.core.commons.Pageable;
 
 /**

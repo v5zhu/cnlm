@@ -6,7 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import net.leebao.busi.dto.ToutiaoDto;
 import net.leebao.busi.entity.Toutiao;
-import net.leebao.busi.params.PageParam;
+import net.leebao.core.commons.PageParam;
 import net.leebao.busi.service.ToutiaoService;
 import net.leebao.core.commons.Pageable;
 import net.leebao.busi.dao.ToutiaoMybatisDao;

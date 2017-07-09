@@ -1,7 +1,7 @@
 package net.leebao.busi.dao;
 
 import net.leebao.busi.entity.Toutiao;
-import net.leebao.busi.params.PageParam;
+import net.leebao.core.commons.PageParam;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;

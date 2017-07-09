@@ -1,6 +1,6 @@
 package net.leebao.busi.dao;
 
-import net.leebao.busi.params.PageParam;
+import net.leebao.core.commons.PageParam;
 import net.leebao.busi.entity.Overtime;
 
 import java.util.List;

@@ -2,7 +2,7 @@ package net.leebao.busi.service;
 
 import com.alibaba.fastjson.JSONArray;
 import net.leebao.busi.entity.SchoolOrganization;
-import net.leebao.busi.params.PageParam;
+import net.leebao.core.commons.PageParam;
 import net.leebao.core.commons.Pageable;
 
 /**

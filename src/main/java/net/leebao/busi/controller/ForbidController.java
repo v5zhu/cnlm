@@ -1,7 +1,7 @@
 package net.leebao.busi.controller;
 
 import net.leebao.core.exception.LeeBaoException;
-import net.leebao.busi.params.PageParam;
+import net.leebao.core.commons.PageParam;
 import net.leebao.busi.service.ForbidService;
 import net.leebao.busi.entity.Forbid;
 import net.leebao.core.commons.Pageable;

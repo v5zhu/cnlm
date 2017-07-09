@@ -48,7 +48,7 @@
         <result column="stu_remark" property="student.remark"/>
     </resultMap>
     <select id="pageList" resultMap="trainMap"
-            parameterType="net.leebao.busi.params.PageParam">
+            parameterType="net.leebao.core.commons.PageParam">
         select
         t.*,
         so.id org_id,

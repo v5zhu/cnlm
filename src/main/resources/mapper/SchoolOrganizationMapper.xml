@@ -19,7 +19,7 @@
     </select>
 
     <select id="pageList" resultType="net.leebao.busi.entity.SchoolOrganization"
-            parameterType="net.leebao.busi.params.PageParam">
+            parameterType="net.leebao.core.commons.PageParam">
         select
         so.*
         from t_b_school_organization so

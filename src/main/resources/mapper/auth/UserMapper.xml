@@ -4,34 +4,5 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="net.leebao.auth.dao.UserDao">
-    <insert id="register" parameterType="net.leebao.auth.entity.User" useGeneratedKeys="true" keyProperty="id">
-        insert into t_si_user(
-        token,phone
-        )
-        values(
-        #{token},#{phone}
-        )
-    </insert>
-    <select id="checkPhone" resultType="string" parameterType="string">
-        select phone from t_si_user where phone=#{0}
-    </select>
-    <update id="perfectUserInfo" statementType="STATEMENT" parameterType="hashMap">
-        <![CDATA[
-        update t_si_user
-        set ${column}=${value}
-        where token=${token}
-        ]]>
-    </update>
-    <select id="findByToken" resultType="net.leebao.auth.entity.User" parameterType="string">
-        select * from t_si_user where token=#{0}
-    </select>
-    <select id="findByUserId" resultType="net.leebao.auth.entity.User" parameterType="long">
-        select * from t_si_user where id=#{0}
-    </select>
-    <select id="checkIsRegisteredByPhone" resultType="int" parameterType="string">
-        select count(1) from t_si_user where phone=#{0}
-    </select>
-    <select id="findAllUsers" resultType="net.leebao.auth.entity.User">
-        select * from t_si_user u order by u.create_time desc
-    </select>
+
 </mapper>

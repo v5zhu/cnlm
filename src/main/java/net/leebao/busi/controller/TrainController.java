@@ -1,7 +1,7 @@
 package net.leebao.busi.controller;
 
 import net.leebao.busi.entity.Train;
-import net.leebao.busi.params.PageParam;
+import net.leebao.core.commons.PageParam;
 import net.leebao.busi.service.TrainService;
 import net.leebao.core.exception.LeeBaoException;
 import net.leebao.core.commons.Pageable;

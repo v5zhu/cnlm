@@ -14,7 +14,7 @@
     </insert>
 
     <select id="pageList" resultType="net.leebao.busi.entity.Overtime"
-            parameterType="net.leebao.busi.params.PageParam">
+            parameterType="net.leebao.core.commons.PageParam">
         select
         o.*
         from t_b_overtime o

@@ -3,7 +3,7 @@ package net.leebao.busi.controller;
 import com.alibaba.fastjson.JSONArray;
 import net.leebao.busi.entity.Student;
 import net.leebao.core.exception.LeeBaoException;
-import net.leebao.busi.params.PageParam;
+import net.leebao.core.commons.PageParam;
 import net.leebao.busi.service.StudentService;
 import net.leebao.core.commons.Pageable;
 import net.leebao.core.commons.Success;

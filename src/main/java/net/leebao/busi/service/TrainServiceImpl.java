@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import net.leebao.busi.dao.TrainDao;
 import net.leebao.busi.entity.Train;
-import net.leebao.busi.params.PageParam;
+import net.leebao.core.commons.PageParam;
 import net.leebao.core.commons.Pageable;
 import net.leebao.utils.DateUtils;
 import org.springframework.stereotype.Service;
