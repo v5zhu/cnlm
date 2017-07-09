@@ -3,15 +3,14 @@ package net.leebao.auth.entity;
 import java.util.Date;
 
 /**
- * Created by LONG on 2017/6/28.
+ * Created by LONG on 2017/7/9.
  */
-public class Function {
+public class Site {
     private Long id;
-    private Site site;
     private String name;
+    private String tag;
     private String url;
-    private String icon;
-    private Menu menu;
+    private Integer status;
     private Long createUserid;
     private String createUsername;
     private Date createTime;
@@ -38,6 +37,14 @@ public class Function {
         this.name = name;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -46,22 +53,29 @@ public class Function {
         this.url = url;
     }
 
-    public String getIcon() {
-        return icon;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    public Menu getMenu() {
-        return menu;
+    public Long getCreateUserid() {
+        return createUserid;
     }
 
-    public void setMenu(Menu menu) {
-        this.menu = menu;
+    public void setCreateUserid(Long createUserid) {
+        this.createUserid = createUserid;
     }
 
+    public String getCreateUsername() {
+        return createUsername;
+    }
+
+    public void setCreateUsername(String createUsername) {
+        this.createUsername = createUsername;
+    }
 
     public Date getCreateTime() {
         return createTime;
@@ -69,6 +83,22 @@ public class Function {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Long getModifyUserid() {
+        return modifyUserid;
+    }
+
+    public void setModifyUserid(Long modifyUserid) {
+        this.modifyUserid = modifyUserid;
+    }
+
+    public String getModifyUsername() {
+        return modifyUsername;
+    }
+
+    public void setModifyUsername(String modifyUsername) {
+        this.modifyUsername = modifyUsername;
     }
 
     public Date getModifyTime() {
@@ -101,45 +131,5 @@ public class Function {
 
     public void setReserve3(String reserve3) {
         this.reserve3 = reserve3;
-    }
-
-    public Site getSite() {
-        return site;
-    }
-
-    public void setSite(Site site) {
-        this.site = site;
-    }
-
-    public Long getCreateUserid() {
-        return createUserid;
-    }
-
-    public void setCreateUserid(Long createUserid) {
-        this.createUserid = createUserid;
-    }
-
-    public String getCreateUsername() {
-        return createUsername;
-    }
-
-    public void setCreateUsername(String createUsername) {
-        this.createUsername = createUsername;
-    }
-
-    public Long getModifyUserid() {
-        return modifyUserid;
-    }
-
-    public void setModifyUserid(Long modifyUserid) {
-        this.modifyUserid = modifyUserid;
-    }
-
-    public String getModifyUsername() {
-        return modifyUsername;
-    }
-
-    public void setModifyUsername(String modifyUsername) {
-        this.modifyUsername = modifyUsername;
     }
 }

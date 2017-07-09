@@ -28,8 +28,8 @@ import java.util.Properties;
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class,BoundSql.class})
 })
-public class VvbootMybatisInterceptor implements Interceptor {
-    private static final Logger logger = LoggerFactory.getLogger(VvbootMybatisInterceptor.class);
+public class LeebaoMybatisInterceptor implements Interceptor {
+    private static final Logger logger = LoggerFactory.getLogger(LeebaoMybatisInterceptor.class);
     private Properties properties;
 
     @Override
@@ -56,7 +56,7 @@ public class VvbootMybatisInterceptor implements Interceptor {
 
     @Override
     public Object plugin(Object target) {
-        return Plugin.wrap(target, VvbootMybatisInterceptor.this);
+        return Plugin.wrap(target, LeebaoMybatisInterceptor.this);
     }
 
     @Override
