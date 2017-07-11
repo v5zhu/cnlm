@@ -65,19 +65,19 @@ public class OpposeServiceImpl implements OpposeService {
         if (inserted == 1) {
             //插入返回1对象点赞数增加
             switch (oppose.getTargetObject()) {
-                case TargetObject.ARTICLE:
+                case ARTICLE:
                     articleMybatisDao.increaseOpposeAmount(oppose.getObjectId());
                     opposeAmount = articleMybatisDao.findOpposeAmountById(oppose.getObjectId());
                     break;
-                case TargetObject.ARTICLE_COMMENT:
+                case ARTICLE_COMMENT:
                     articleCommentMybatisDao.increaseOpposeAmount(oppose.getObjectId());
                     opposeAmount = articleCommentMybatisDao.findOpposeAmountById(oppose.getObjectId());
                     break;
-                case TargetObject.ARTICLE_COMMENT_REPLY:
+                case ARTICLE_COMMENT_REPLY:
                     articleCommentReplyMybatisDao.increaseOpposeAmount(oppose.getObjectId());
                     opposeAmount = articleCommentReplyMybatisDao.findOpposeAmountById(oppose.getObjectId());
                     break;
-                case TargetObject.NEWS:
+                case NEWS:
                     toutiaoMybatisDao.increaseOpposeAmount(oppose.getObjectId());
                     opposeAmount = toutiaoMybatisDao.findOpposeAmountById(oppose.getObjectId());
                     break;

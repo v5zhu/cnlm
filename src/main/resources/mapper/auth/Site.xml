@@ -2,18 +2,18 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pax.cms.auth.dao.SiteDao">
+<mapper namespace="net.leebao.auth.dao.SiteDao">
 
 	<select id="getNextId" resultType="int">
         select case when count(id)= 0 then 1 else max(id)+1 end from t_si_site;
     </select>
 
     <insert id="save" parameterType="map">
-        insert INTO t_si_site(id,name,tag,url,status,buildoper,builddatetime,notes)
-        values(#{id},#{name},#{tag},#{url},#{status},#{buildoper},#{builddatetime},#{notes});
+        insert INTO t_si_site(id,name,tag,url,status,buildoper,create_time,notes)
+        values(#{id},#{name},#{tag},#{url},#{status},#{buildoper},#{createTime},#{notes});
     </insert>
     
-    <select id="list" resultType="Site" parameterType="com.pax.cms.core.model.PageQueryParam">
+    <select id="list" resultType="net.leebao.auth.entity.Site" parameterType="net.leebao.core.commons.PageParam">
     
         select t.* 
         from t_si_site t
@@ -28,21 +28,21 @@
                 <foreach collection="sortMap" index="key"  item="val" open="order by " separator="," close="  ">
 	                #{key} #{val}
 	        	</foreach>
-	        	, builddatetime desc
+	        	, create_time desc
             </when>
             <otherwise>
-                  order by builddatetime desc
+                  order by create_time desc
              </otherwise>
          </choose>
 		
     </select>
     
-    <select id="listAll" resultType="Site">
+    <select id="listAll" resultType="net.leebao.auth.entity.Site">
     	select t.* 
         from t_si_site t
     </select>
     
-    <select id="get" resultType="Site" parameterType="string">
+    <select id="get" resultType="net.leebao.auth.entity.Site" parameterType="string">
         select t.* from t_si_site t where t.id = #{id};
     </select>
     

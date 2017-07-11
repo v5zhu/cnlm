@@ -2,7 +2,6 @@ package net.leebao.busi.controller;
 
 import net.leebao.busi.dto.init.area.*;
 import net.leebao.core.exception.LeeBaoException;
-import net.leebao.open.busi.dto.init.area.*;
 import net.leebao.busi.service.AreaService;
 import net.leebao.core.commons.Success;
 import net.leebao.core.exception.InnerException;

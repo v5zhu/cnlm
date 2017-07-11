@@ -3,8 +3,6 @@ package net.leebao.busi.service.impl;
 import net.leebao.busi.dao.init.area.*;
 import net.leebao.busi.dto.init.area.*;
 import net.leebao.busi.service.RegionService;
-import net.leebao.open.busi.dao.init.area.*;
-import net.leebao.open.busi.dto.init.area.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

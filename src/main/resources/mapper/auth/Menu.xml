@@ -13,12 +13,12 @@
     </select>
 
     <insert id="save" parameterType="map">
-        insert INTO t_si_menu(id,site_id,name,orderno,url,pid,img,buildoper,builddatetime,notes)
-        values(#{id},#{site_id},#{name},#{orderno},#{url},#{pid},#{img},#{buildoper},#{builddatetime},#{notes})
+        insert INTO t_si_menu(id,site_id,name,orderno,url,pid,img,buildoper,create_time,notes)
+        values(#{id},#{site_id},#{name},#{orderno},#{url},#{pid},#{img},#{buildoper},#{createTime},#{notes})
     </insert>
     
-    <resultMap type="Menu" id="menuResult">
-    	
+    <resultMap type="net.leebao.auth.entity.Menu" id="menuResult">
+
     	<id property="id" column="id" />
     	
     	<result property="name" column="name"/>
@@ -71,7 +71,7 @@
         where menu_id = #{id};
     </select>
 	
-	<resultMap type="Menu" id="menuResultForFunc">
+	<resultMap type="net.leebao.auth.entity.Menu" id="menuResultForFunc">
     	
     	<id property="id" column="id" />
     	
@@ -81,7 +81,7 @@
     	<result property="img" column="img"/>
     	<result property="pmenu.id" column="pid"/>
     	
-    	<collection property="funcs" ofType="Function">
+    	<collection property="funcs" ofType="net.leebao.auth.entity.Function">
     		<id property="id" column="func_id" />
     		<result property="name" column="func_name"/>
     		<result property="url" column="func_url"/>

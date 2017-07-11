@@ -13,11 +13,11 @@
     </select>
 
     <insert id="save" parameterType="map">
-        insert INTO t_si_authority(id,site_id,name,tag,buildoper,builddatetime,notes)
-        values(#{id},#{site_id},#{name},#{tag},#{buildoper},#{builddatetime},#{notes})
+        insert INTO t_si_authority(id,site_id,name,tag,buildoper,create_time,notes)
+        values(#{id},#{site_id},#{name},#{tag},#{buildoper},#{createTime},#{notes})
     </insert>
     
-    <resultMap type="Authority" id="autResult">
+    <resultMap type="net.leebao.auth.entity.Permission" id="autResult">
     	
     	<id property="id" column="id" />
     	
@@ -29,7 +29,7 @@
     	
     </resultMap>
     
-    <select id="list" resultMap="autResult" parameterType="com.pax.cms.core.model.PageQueryParam">
+    <select id="list" resultMap="autResult" parameterType="net.leebao.core.commons.PageParam">
     
         select t.*,t2.name as site_name  
         from t_si_authority t left outer join t_si_site t2 
@@ -45,10 +45,10 @@
                 <foreach collection="sortMap" index="key"  item="val" open="order by " separator="," close="  ">
 	                #{key} #{val}
 	        	</foreach>
-	        	, builddatetime desc
+	        	, create_time desc
             </when>
             <otherwise>
-                  order by builddatetime desc
+                  order by create_time desc
              </otherwise>
          </choose>
 		
@@ -104,7 +104,7 @@
         </foreach>
     </insert>
     
-    <resultMap type="Authority" id="autResultForMenu">
+    <resultMap type="net.leebao.auth.entity.Permission" id="autResultForMenu">
     	<id property="id" column="id" />
     	
     	<result property="site.id" column="site_id" />
@@ -114,7 +114,7 @@
     	<association property="menu" resultMap="menuResult"/>
     </resultMap>
     
-    <resultMap type="Menu" id="menuResult">
+    <resultMap type="net.leebao.auth.entity.Menu" id="menuResult">
     	<id property="id" column="menu_id" />
     	<result property="name" column="menu_name"/>
     	<result property="orderno" column="menu_orderno"/>
