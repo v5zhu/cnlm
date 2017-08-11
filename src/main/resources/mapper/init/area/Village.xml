@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="net.leebao.busi.dao.init.area.VillageMybatisDao">
-    <select id="findVillagesByTownCode" resultType="net.leebao.busi.entity.init.area.Village" parameterType="string">
+<mapper namespace="me.cnlm.busi.dao.init.area.VillageMybatisDao">
+    <select id="findVillagesByTownCode" resultType="me.cnlm.busi.entity.init.area.Village" parameterType="string">
         select v.code,v.name,v.town_code
         from t_bi_village v
         where v.town_code=#{0}

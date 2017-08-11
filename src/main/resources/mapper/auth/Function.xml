@@ -24,7 +24,7 @@
         values(#{id},#{site_id},#{name},#{img},#{url},#{menu_id},#{buildoper},#{createTime},#{notes})
     </insert>
     
-    <resultMap type="net.leebao.auth.entity.Function" id="funcResult">
+    <resultMap type="me.cnlm.auth.entity.Function" id="funcResult">
     	
     	<id property="id" column="id" />
     	
@@ -37,7 +37,7 @@
     	<result property="menu.name" column="menu_name"/>
     </resultMap>
     
-    <select id="list" resultMap="funcResult" parameterType="net.leebao.core.commons.PageParam">
+    <select id="list" resultMap="funcResult" parameterType="me.cnlm.core.commons.PageParam">
     
         select t.*,t2.name as site_name,t3.name as menu_name 
         from t_si_function t left outer join t_si_site t2 
@@ -91,7 +91,7 @@
 		delete from t_si_function where id=#{id};
 	</delete>
 	
-	<resultMap type="net.leebao.auth.entity.Function" id="funcResultForMenu">
+	<resultMap type="me.cnlm.auth.entity.Function" id="funcResultForMenu">
     	<id property="id" column="id" />
     	<result property="site.id" column="site_id" />
     	<result property="site.name" column="site_name" />
@@ -101,7 +101,7 @@
     	<association property="menu" resultMap="menuResult"/>
     </resultMap>
     
-    <resultMap type="net.leebao.auth.entity.Menu" id="menuResult">
+    <resultMap type="me.cnlm.auth.entity.Menu" id="menuResult">
     	<id property="id" column="menu_id" />
     	<result property="name" column="menu_name"/>
     	<result property="orderno" column="menu_orderno"/>

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.leebao.auth.dao.UserDao">
-	<insert id="register" parameterType="net.leebao.auth.entity.User" useGeneratedKeys="true" keyProperty="id">
+<mapper namespace="me.cnlm.auth.dao.UserDao">
+	<insert id="register" parameterType="me.cnlm.auth.entity.User" useGeneratedKeys="true" keyProperty="id">
 		insert into t_si_user(
 		token,phone
 		)
@@ -21,16 +21,16 @@
         where token=${token}
         ]]>
 	</update>
-	<select id="findByToken" resultType="net.leebao.auth.entity.User" parameterType="string">
+	<select id="findByToken" resultType="me.cnlm.auth.entity.User" parameterType="string">
 		select * from t_si_user where token=#{0}
 	</select>
-	<select id="findByUserId" resultType="net.leebao.auth.entity.User" parameterType="long">
+	<select id="findByUserId" resultType="me.cnlm.auth.entity.User" parameterType="long">
 		select * from t_si_user where id=#{0}
 	</select>
 	<select id="checkIsRegisteredByPhone" resultType="int" parameterType="string">
 		select count(1) from t_si_user where phone=#{0}
 	</select>
-	<select id="findAllUsers" resultType="net.leebao.auth.entity.User">
+	<select id="findAllUsers" resultType="me.cnlm.auth.entity.User">
 		select * from t_si_user u order by u.create_time desc
 	</select>
 
@@ -42,7 +42,7 @@
         select site_id from t_si_user where id = #{id}
     </select>
     
-    <resultMap type="net.leebao.auth.entity.User" id="userMap">
+    <resultMap type="me.cnlm.auth.entity.User" id="userMap">
     	
     	<id property="id" column="id" />
     	
@@ -88,7 +88,7 @@
 
     </resultMap>
     
-    <select id="list" resultMap="userMap" parameterType="net.leebao.core.commons.PageParam">
+    <select id="list" resultMap="userMap" parameterType="me.cnlm.core.commons.PageParam">
     
         select
 			u.*,
@@ -211,7 +211,7 @@
 		delete from t_si_userrolemodel where user_id=#{id};
 	</delete>
 	
-	<select id="findByLoginname" resultType="net.leebao.auth.entity.User" parameterType="string">
+	<select id="findByLoginname" resultType="me.cnlm.auth.entity.User" parameterType="string">
 		select * from t_si_user where loginname=#{0}
 	</select>
 	

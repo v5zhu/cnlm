@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="com.vvboot.busi.end.dao.common.ApprovalMybatisDao">
-    <insert id="addApproval" parameterType="net.leebao.busi.entity.common.Approval">
+    <insert id="addApproval" parameterType="me.cnlm.busi.entity.common.Approval">
         insert ignore into t_b_approval(
         who,object_id,target_object,create_time,update_time
         )

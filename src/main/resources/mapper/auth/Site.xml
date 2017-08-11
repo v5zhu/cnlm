@@ -13,7 +13,7 @@
         values(#{id},#{name},#{tag},#{url},#{status},#{buildoper},#{createTime},#{notes});
     </insert>
     
-    <select id="list" resultType="net.leebao.auth.entity.Site" parameterType="net.leebao.core.commons.PageParam">
+    <select id="list" resultType="me.cnlm.auth.entity.Site" parameterType="me.cnlm.core.commons.PageParam">
     
         select t.* 
         from t_si_site t
@@ -37,12 +37,12 @@
 		
     </select>
     
-    <select id="listAll" resultType="net.leebao.auth.entity.Site">
+    <select id="listAll" resultType="me.cnlm.auth.entity.Site">
     	select t.* 
         from t_si_site t
     </select>
     
-    <select id="get" resultType="net.leebao.auth.entity.Site" parameterType="string">
+    <select id="get" resultType="me.cnlm.auth.entity.Site" parameterType="string">
         select t.* from t_si_site t where t.id = #{id};
     </select>
     

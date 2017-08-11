@@ -29,7 +29,7 @@
         values(#{id},#{site_id},#{name},#{org_id},#{buildoper},#{createTime},#{notes})
     </insert>
     
-    <resultMap type="net.leebao.auth.entity.Role" id="roleResult">
+    <resultMap type="me.cnlm.auth.entity.Role" id="roleResult">
     	
     	<id property="id" column="id" />
     	
@@ -40,7 +40,7 @@
     	<result property="org.name" column="org_name"/>
     </resultMap>
     
-    <select id="list" resultMap="roleResult" parameterType="net.leebao.core.commons.PageParam">
+    <select id="list" resultMap="roleResult" parameterType="me.cnlm.core.commons.PageParam">
     
         select t.*,t2.name as site_name,t3.name as org_name   
         from t_si_role t left outer join t_si_site t2 

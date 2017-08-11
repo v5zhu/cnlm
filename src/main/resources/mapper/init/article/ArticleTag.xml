@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="net.leebao.busi.dao.init.article.ArticleTagMybatisDao">
+<mapper namespace="me.cnlm.busi.dao.init.article.ArticleTagMybatisDao">
     <insert id="addArticleTag" parameterType="list">
         insert ignore into t_b_article_tag(
         article_id,name
@@ -15,7 +15,7 @@
             )
         </foreach>
     </insert>
-    <select id="findTagListByArticleIds" resultType="net.leebao.busi.entity.init.article.ArticleTag"
+    <select id="findTagListByArticleIds" resultType="me.cnlm.busi.entity.init.article.ArticleTag"
             parameterType="list">
         select tag.*
         from t_b_article_tag tag

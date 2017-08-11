@@ -17,7 +17,7 @@
         values(#{id},#{site_id},#{name},#{orderno},#{url},#{pid},#{img},#{buildoper},#{createTime},#{notes})
     </insert>
     
-    <resultMap type="net.leebao.auth.entity.Menu" id="menuResult">
+    <resultMap type="me.cnlm.auth.entity.Menu" id="menuResult">
 
     	<id property="id" column="id" />
     	
@@ -71,7 +71,7 @@
         where menu_id = #{id};
     </select>
 	
-	<resultMap type="net.leebao.auth.entity.Menu" id="menuResultForFunc">
+	<resultMap type="me.cnlm.auth.entity.Menu" id="menuResultForFunc">
     	
     	<id property="id" column="id" />
     	
@@ -81,7 +81,7 @@
     	<result property="img" column="img"/>
     	<result property="pmenu.id" column="pid"/>
     	
-    	<collection property="funcs" ofType="net.leebao.auth.entity.Function">
+    	<collection property="funcs" ofType="me.cnlm.auth.entity.Function">
     		<id property="id" column="func_id" />
     		<result property="name" column="func_name"/>
     		<result property="url" column="func_url"/>

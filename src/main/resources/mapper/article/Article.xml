@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="com.vvboot.busi.end.dao.article.ArticleMybatisDao">
-    <insert id="writeArticle" parameterType="net.leebao.busi.entity.article.Article">
+    <insert id="writeArticle" parameterType="me.cnlm.busi.entity.article.Article">
         insert into t_b_article(
         id,user_id,author,title,summary,
         content,category,type,tag,read_amount,
@@ -18,10 +18,10 @@
         #{auditStatus}
         )
     </insert>
-    <select id="findById" resultType="net.leebao.busi.entity.article.Article" parameterType="string">
+    <select id="findById" resultType="me.cnlm.busi.entity.article.Article" parameterType="string">
         select a.* from t_b_article a where a.id=#{0}
     </select>
-    <update id="updateArticle" parameterType="net.leebao.busi.entity.article.Article">
+    <update id="updateArticle" parameterType="me.cnlm.busi.entity.article.Article">
         update t_b_article
         <set>
             title=#{title},
@@ -39,13 +39,13 @@
         </set>
         where id=#{id}
     </update>
-    <select id="articleList" resultType="net.leebao.busi.entity.article.Article" parameterType="string">
+    <select id="articleList" resultType="me.cnlm.busi.entity.article.Article" parameterType="string">
         select art.*
         from t_b_article art
         where art.userId=#{0}
     </select>
 
-    <select id="findAll" resultType="net.leebao.busi.entity.article.Article">
+    <select id="findAll" resultType="me.cnlm.busi.entity.article.Article">
         select art.*
         from t_b_article art
     </select>

@@ -8,13 +8,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.1.RELEASE</version>
+        <version>1.5.4.RELEASE</version>
     </parent>
     <groupId>springboot-test</groupId>
-    <artifactId>leebao</artifactId>
+    <artifactId>cnlm</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <name>leebao</name>
+    <name>cnlm</name>
 
     <properties>
         <mybatis-spring-boot>1.2.0</mybatis-spring-boot>

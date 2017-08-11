@@ -3,13 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pax.cms.auth.dao.OrganizationDao">
-    <insert id="insert" parameterType="net.leebao.auth.entity.Organization">
+    <insert id="insert" parameterType="me.cnlm.auth.entity.Organization">
         insert into t_si_organization(id,site_id,orgId,name,pid,orderno,buildoper,create_time)
         VALUES (
         #{id},#{site.id},#{orgId},#{name},#{parent.id},#{orderno},#{buildoper},#{createTime}
         )
     </insert>
-    <update id="update" parameterType="net.leebao.auth.entity.Organization">
+    <update id="update" parameterType="me.cnlm.auth.entity.Organization">
         update t_si_organization
         <set>
             orgId=#{orgId},
@@ -42,7 +42,7 @@
         where t.id = #{id};
     </select>
 
-    <resultMap type="net.leebao.auth.entity.Organization" id="orgResult">
+    <resultMap type="me.cnlm.auth.entity.Organization" id="orgResult">
 
         <id property="id" column="id"/>
 
@@ -52,7 +52,7 @@
         <result property="parent.id" column="pid"/>
         <result property="site.id" column="site_id"/>
     </resultMap>
-    <select id="findByMaps" resultType="net.leebao.auth.entity.Organization" parameterType="hashMap">
+    <select id="findByMaps" resultType="me.cnlm.auth.entity.Organization" parameterType="hashMap">
         select * from t_si_organization
         <where>
             site_id=#{siteId}
