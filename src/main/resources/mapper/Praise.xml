@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="me.cnlm.busi.dao.PraiseDao">
+    <insert id="insert" parameterType="me.cnlm.busi.entity.Praise" useGeneratedKeys="true" keyProperty="id">
+        insert into t_b_praise(
+        id,praise,ip,username,bless
+        )
+        values(
+        #{id},#{praise},#{ip},#{username},#{bless}
+        )
+    </insert>
+
+    <select id="findTotalPraise" resultType="int">
+        select sum(praise) from t_b_praise;
+    </select>
+</mapper>
