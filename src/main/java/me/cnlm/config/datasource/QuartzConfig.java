@@ -84,7 +84,7 @@ public class QuartzConfig {
         //factory.setDataSource(dataSource);
         factory.setStartupDelay(10);
         factory.setQuartzProperties(quartzProperties());
-        factory.setAutoStartup(true);
+        factory.setAutoStartup(false);
         factory.setApplicationContextSchedulerContextKey("applicationContext");
         //注册触发器
 //        factory.setTriggers(updateTrigger,deleteTrigger);//直接使用配置文件

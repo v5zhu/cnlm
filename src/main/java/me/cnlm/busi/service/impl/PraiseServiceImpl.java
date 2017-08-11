@@ -1,7 +1,6 @@
 package me.cnlm.busi.service.impl;
 
 import me.cnlm.busi.dao.PraiseDao;
-import me.cnlm.busi.entity.Praise;
 import me.cnlm.busi.service.PraiseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +18,8 @@ public class PraiseServiceImpl implements PraiseService{
 
     @Override
     @Transactional
-    public int insert(Praise praise) {
-        praiseDao.insert(praise);
+    public int increase() {
+        praiseDao.increase();
         return totalPraise();
     }
 

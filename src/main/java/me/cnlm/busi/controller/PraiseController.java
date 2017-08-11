@@ -1,7 +1,6 @@
 package me.cnlm.busi.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import me.cnlm.busi.entity.Praise;
 import me.cnlm.busi.service.PraiseService;
 import me.cnlm.core.commons.Success;
 import me.cnlm.core.exception.InnerException;
@@ -9,14 +8,14 @@ import me.cnlm.core.exception.LeeBaoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Created by zhuxl@paxsz.com on 2016/7/27.
@@ -30,35 +29,61 @@ public class PraiseController {
     @Autowired
     private PraiseService praiseService;
 
-    @RequestMapping(value = "", method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/increase")
     @ResponseBody
-    public ResponseEntity insert(@RequestBody Praise praise) {
+    public void increase(HttpServletRequest request, HttpServletResponse response) {
         try {
-            logger.info("接收到点赞:[{}]", JSONObject.toJSONString(praise));
-            int amount=praiseService.insert(praise);
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
+
+            int amount = praiseService.increase();
             Success ok = new Success(amount, "点赞成功");
-            return new ResponseEntity(ok, HttpStatus.OK);
+
+
+            String result = JSONObject.toJSONString(ok);
+
+            //前端传过来的回调函数名称
+            String callback = request.getParameter("callback");
+            //用回调函数名称包裹返回数据，这样，返回数据就作为回调函数的参数传回去了
+            result = callback + "(" + result + ")";
+
+            response.getWriter().write(result);
+
         } catch (LeeBaoException e) {
-            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+            e.printStackTrace();
         } catch (InnerException e) {
-            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    @RequestMapping(value = "/total", method = RequestMethod.GET,
+    @RequestMapping(value = "/total",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity totalPraise() {
+    public void totalPraise(HttpServletRequest request, HttpServletResponse response) {
         try {
-            int amount=praiseService.totalPraise();
-            Success ok = new Success(amount, "查询成功");
-            return new ResponseEntity(ok, HttpStatus.OK);
-        } catch (LeeBaoException e) {
-            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
+
+            int amount = praiseService.totalPraise();
+            Success ok = new Success(amount, "点赞成功");
+
+
+            String result = JSONObject.toJSONString(ok);
+
+            //前端传过来的回调函数名称
+            String callback = request.getParameter("callback");
+            //用回调函数名称包裹返回数据，这样，返回数据就作为回调函数的参数传回去了
+            result = callback + "(" + result + ")";
+
+            response.getWriter().write(result);
+        }  catch (LeeBaoException e) {
+            e.printStackTrace();
         } catch (InnerException e) {
-            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

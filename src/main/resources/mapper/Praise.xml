@@ -4,16 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
 <mapper namespace="me.cnlm.busi.dao.PraiseDao">
-    <insert id="insert" parameterType="me.cnlm.busi.entity.Praise" useGeneratedKeys="true" keyProperty="id">
-        insert into t_b_praise(
-        id,praise,ip,username,bless
-        )
-        values(
-        #{id},#{praise},#{ip},#{username},#{bless}
-        )
+    <insert id="increase">
+        update t_b_praise set praise=praise+1 where id=1
     </insert>
 
     <select id="findTotalPraise" resultType="int">
-        select sum(praise) from t_b_praise;
+        select praise from t_b_praise where id=1;
     </select>
 </mapper>

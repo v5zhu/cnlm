@@ -1,6 +1,5 @@
 package me.cnlm.busi.dao;
 
-import me.cnlm.busi.entity.Praise;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -10,5 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PraiseDao {
     int findTotalPraise();
 
-    int insert(Praise praise);
+    int increase();
 }
